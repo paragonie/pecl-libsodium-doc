@@ -1,0 +1,70 @@
+[
+    {
+        "title": "Introduction to Libsodium Development in PHP",
+        "source": "00-intro.md",
+        "sections": [
+            {
+                "title": "What is Libsodium?",
+                "anchor": "what-is-libsodium"
+            },
+            {
+                "title": "Terms and Concepts",
+                "anchor": "terms-concepts"
+            },
+            {
+                "title": "Installing Libsodium and the PHP extension",
+                "anchor": "installing-libsodium"
+            }
+        ]
+    },
+    {
+        "title": "Quick Start Guide",
+        "source": "01-quick-start.md",
+        "sections": [
+            {
+                "title": "Which Tool to Use, for Which Purpose",
+                "anchor": "which-tool"
+            }
+        ]
+    },
+    {
+        "title": "Random Data",
+        "source": "02-random-data.md",
+        "sections": []
+    },
+    {
+        "title": "Utilities and Helpers",
+        "source": "03-utilities-helpers.md",
+        "sections": []
+    },
+    {
+        "title": "Basic Secret-key Cryptography",
+        "source": "04-secretkey-crypto.md",
+        "sections": []
+    },
+    {
+        "title": "Basic Public-key Cryptography",
+        "source": "05-publickey-crypto.md",
+        "sections": []
+    },
+    {
+        "title": "Hashing",
+        "source": "06-hashing.md",
+        "sections": []
+    },
+    {
+        "title": "Password Hashing",
+        "source": "07-password-hashing.md",
+        "sections": []
+    },
+    {
+        "title": "Advanced",
+        "source": "08-password-hashing.md",
+        "sections": []
+    },
+    {
+        "title": "Recipes",
+        "source": "09-recipes.md",
+        "sections": []
+    }
+]
