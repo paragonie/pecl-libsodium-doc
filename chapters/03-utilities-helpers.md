@@ -1,5 +1,8 @@
 # Utilities and Helpers
 
+These functions are useful in general, regardless of which cryptographic utility
+your application needs.
+
 <h3 id="bin2hex">Hexadecimal Encoding</h3>
 
 > `string \Sodium\bin2hex(string $binary)`
@@ -23,7 +26,7 @@ characters to ignore. This is useful if, for example, you want to convert an
 IPv6 address into a raw binary string without the : separators breaking your
 algorithm.
 
-    $binary = \Sodium\hex2bin(string $ipv6_addr, ':[]');
+    $binary = \Sodium\hex2bin(string $ipv6_addr, ':');
 
 Like `\Sodium\bin2hex()`, `\Sodium\hex2bin()` is resistant to side-channel
 attacks while PHP's built-in function is not.
@@ -41,7 +44,7 @@ the contents of a variable.
 
 <h3 id="increment">Incrementor For Sequential Nonces</h3>
 
-> `void \Sodium\increment(&string $secret);`
+> `void \Sodium\increment(&string $binary_string)`
 
 If you need to increment a value (e.g. given a randomly generated nonce, obtain
 the next nonce), use `\Sodium\increment()`.

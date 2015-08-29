@@ -1,7 +1,13 @@
 # Random Data
 
 Frequently when working with cryptography, you will need random bytes or integers
-for various purposes (encryption keys, nonces, etc). Libsodium has you covered.
+for various purposes (encryption keys, nonces, etc). Specifically, you need to
+use a **C**ryptographically **S**ecure **P**seudo-**R**andom **N**umber **G**enerator
+(CSPRNG). A general purpose random number generator will ***NOT*** suffice.
+
+The functions on this page should be prioritized *above* what PHP 5 offers 
+(`mt_rand()` or `openssl_random_pseudo_bytes()`). The new PHP 7 CSPRNG functions
+(`random_int()` and `random_bytes()`) are acceptable.
 
 <h3 id="randombytes-buf">Random Bytes</h3>
 
@@ -34,15 +40,15 @@ and 99. 100 is **not** included in the possible output values for
 > want a uniform distribution for a cryptographically secure pseudorandom
 > number generator.
 
-The maximum possible value for $n is `2147483647`, *not* `PHP_INT_MAX`.
+The maximum possible value for $n is `2147483647`, *not `PHP_INT_MAX`*.
 
 <h3 id="randombytes-buf">Random 16-bit Integers</h3>
 
 > `int \Sodium\randombytes_random16()`
 
-Returns an integer between 0 and 65535, following a uniform distribution.
+Returns an integer between 0 and 65535 (inclusive), following a uniform distribution.
 
-    \Sodium\randombytes_random16();
+    $tcp_port = \Sodium\randombytes_random16();
 
 ### Extra Information
 
