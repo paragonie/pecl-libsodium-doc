@@ -50,29 +50,36 @@ There are two important things to keep in mind here:
 The remaining pages will proceed under the assumption that you have read these terms
 and and understood [basic cryptography concepts](https://paragonie.com/blog/2015/08/you-wouldnt-base64-a-password-cryptography-decoded).
 
-* **Cryptography** - a subset of computer science that focuses on secure communication
-* **Key** - in cryptography, a key is a piece of information that determines the
-  output of a cryptographic algorithm
-* **Cryptographic hash functions** (hashes) - a deterministic one-way transformation
-  of variable-length data into a fixed-size output -- by itself, hash functions 
-  do not use a key
-* **Secret-key Cryptography** - refers to cryptographic algorithms and protocols 
-  where both participants share the same secret key
-* **Public-key Cryptography** - refers to cryptographic algorithms and protocols
-  where each participant possesses a private key and a related public key
+* **Cryptography**:  
+  A subset of computer science that focuses on secure communication.
+* **Key**:  
+  In cryptography, a key is a piece of information that determines the output of
+  a cryptographic algorithm.
+* **Cryptographic hash functions** (hashes):  
+  A deterministic one-way transformation of variable-length data into a fixed-size
+  output -- by itself, a hash function does not use a key.
+* **Secret-key Cryptography**:  
+  Cryptographic algorithms and protocols where both participants share the same 
+  secret key.
+* **Public-key Cryptography**:  
+  Cryptographic algorithms and protocols where each participant possesses a 
+  private key and a related public key.
   
   Their private key is never shared; their public key is. The public key is always 
   mathematically related to the private key, such that someone possessing the
   private key can generate the correct public key, but the opposite is not
   practical.
-* **Encryption** - the reversible transformation of data, with the use of one or
-  more keys, to ensure the only someone possessing the correct key can read the
-  contents of a given message
-* **Authentication** - provides assurance that a message was sent by someone in
-  possession of the authentication key
-* **Digital Signature** - calculated from a message and a private key; allows
-  anyone in possession of the message, signature, and public key to verify that
-  a particular message is authentic
+* **Encryption**:  
+  The reversible transformation of data, with the use of one or more keys, to 
+  ensure the only someone possessing the correct key can read the contents of a
+  given message.
+* **Authentication**:  
+  Provides assurance that a message was sent by someone in possession of the 
+  secret authentication key.
+* **Digital Signature**:  
+  Calculated from a message and a private key; allows anyone in possession of 
+  the message, signature, and public key to verify that a particular message is
+  authentic.
 
 <h3 id="installing-libsodium">Installing Libsodium and the PHP extension</h3>
 
