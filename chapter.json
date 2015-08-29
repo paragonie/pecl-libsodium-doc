@@ -30,41 +30,145 @@
     {
         "title": "Random Data",
         "source": "02-random-data.md",
-        "sections": []
+        "sections": [
+            {
+                "title": "Random Bytes",
+                "anchor": "randombytes-buf"
+            },
+            {
+                "title": "Random Integers",
+                "anchor": "randombytes-uniform"
+            },
+            {
+                "title": "Random 16-bit Integers",
+                "anchor": "randombytes-random16"
+            }
+        ]
     },
     {
         "title": "Utilities and Helpers",
         "source": "03-utilities-helpers.md",
-        "sections": []
+        "sections": [
+            {
+                "title": "Hexadecimal Encoding",
+                "anchor": "bin2hex"
+            },
+            {
+                "title": "Hexadecimal Decoding",
+                "anchor": "hex2bin"
+            },
+            {
+                "title": "Wiping Sensitive Data from Memory",
+                "anchor": "memzero"
+            },
+            {
+                "title": "Incrementor For Sequential Nonces",
+                "anchor": "increment"
+            },
+            {
+                "title": "Constant-Time Memory Comparison",
+                "anchor": "memcmp"
+            }
+        ]
     },
     {
         "title": "Basic Secret-key Cryptography",
         "source": "04-secretkey-crypto.md",
-        "sections": []
+        "sections": [
+            {
+                "title": "Authenticated Secret-key Encryption",
+                "anchor": "crypto-secretbox"
+            },
+            {
+                "title": "Secret-key Authentication",
+                "anchor": "crypto-auth"
+            }
+        ]
     },
     {
         "title": "Basic Public-key Cryptography",
         "source": "05-publickey-crypto.md",
-        "sections": []
+        "sections": [
+            {
+                "title": "Authenticated Public-key Encryption",
+                "anchor": "crypto-box"
+            },
+            {
+                "title": "Public-key Signatures",
+                "anchor": "crypto-sign"
+            }
+        ]
     },
     {
         "title": "Hashing",
         "source": "06-hashing.md",
-        "sections": []
+        "sections": [
+            {
+                "title": "Generic Hashing",
+                "anchor": "crypto-generichash"
+            },
+            {
+                "title": "Short Hashing",
+                "anchor": "crypto-shorthash"
+            }
+        ]
     },
     {
         "title": "Password Hashing",
         "source": "07-password-hashing.md",
-        "sections": []
+        "sections": [
+            {
+                "title": "(This Space Reserved for Argon2 Finalization)",
+                "anchor": "crypto-pwhash"
+            },
+            {
+                "title": "Scrypt Password Hashing and Verification",
+                "anchor": "crypto-pwhash-scryptsalsa208sha256-str"
+            },
+            {
+                "title": "Key Derivation",
+                "anchor": "crypto-pwhash-scryptsalsa208sha256"
+            }
+        ]
     },
     {
         "title": "Advanced",
         "source": "08-advanced.md",
-        "sections": []
+        "sections": [
+            {
+                "title": "(This Space Reserved for the CAESAR Competition Winner)",
+                "anchor": "crypto-aead"
+            },
+            {
+                "title": "Authenticated (secret-key) Encryption with Associated Data - ChaCha20 + Poly1305",
+                "anchor": "crypto-aead-chacha20poly1305"
+            },
+            {
+                "title": "Scalar multiplication (Elliptic Curve Cryptography)",
+                "anchor": "crypto-scalarmult"
+            },
+            {
+                "title": "Get Public-key from Secret-key",
+                "anchor": "public-key-from-secret-key"
+            },
+            {
+                "title": "Elliptic Curve Diffie Hellman Key Exchange",
+                "anchor": "crypto-kx"
+            },
+            {
+                "title": "Unauthenticated Secret-key Encryption (Dangerous)",
+                "anchor": "crypto-stream"
+            }
+        ]
     },
     {
         "title": "Recipes",
         "source": "09-recipes.md",
-        "sections": []
+        "sections": [
+            {
+                "title": "Sealed application security reports",
+                "anchor": "sealed-logs"
+            }
+        ]
     }
 ]
