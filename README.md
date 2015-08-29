@@ -4,6 +4,8 @@ This online documentation attempts to introduce PHP developers to the libsodium
 extension. Everything contained within is made available for free by [Paragon Initiative Enterprises](https://paragonie.com)
 to promote the adoption of better security practices in the PHP community.
 
+You can read this ebook online at Github or on [P.I.E.'s ebook reader](https://paragonie.com/book/pecl-libsodium).
+
 This ebook is available to the public under the [Creative Commons Attribution International 4.0 License](https://creativecommons.org/licenses/by/4.0).
 Feel free to fork, download, print, copy, redistribute, share, and remix it to
 your heart's content.
