@@ -30,7 +30,7 @@ attacks while PHP's built-in function is not.
 
 <h3 id="memzero">Wiping Sensitive Data from Memory</h3>
 
-> void \Sodium\memzero(&string $secret);
+> `void \Sodium\memzero(&string $secret);`
 
 When you are done handling sensitive information, use `\Sodium\memzero()` to erase
 the contents of a variable.
@@ -41,7 +41,7 @@ the contents of a variable.
 
 <h3 id="increment">Incrementor For Sequential Nonces</h3>
 
-> void \Sodium\increment(&string $secret);
+> `void \Sodium\increment(&string $secret);`
 
 If you need to increment a value (e.g. given a randomly generated nonce, obtain
 the next nonce), use `\Sodium\increment()`.
@@ -53,7 +53,7 @@ the next nonce), use `\Sodium\increment()`.
 
 <h3 id="memcmp">Constant-Time Memory Comparison</h3>
 
-> int \Sodium\memcmp(string $a, string $b)
+> `int \Sodium\memcmp(string $a, string $b)`
 
 Compare two strings in constant time. (Similar to [`hash_equals()`](https://secure.php.net/hash_equals).)
 
