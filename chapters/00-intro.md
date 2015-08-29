@@ -91,6 +91,12 @@ On Debian >= 8 and Ubuntu >= 15.04, libsodium can be installed with:
 
     apt-get install libsodium-dev
 
+If you're running an older LTS version of Ubuntu (e.g. 12.04), you can use one
+of these PPAs to get libsodium installed:
+
+* [https://answers.launchpad.net/~chris-lea/+archive/ubuntu/libsodium](https://answers.launchpad.net/~chris-lea/+archive/ubuntu/libsodium)
+* [https://launchpad.net/~anton+/+archive/ubuntu/dnscrypt](https://launchpad.net/~anton+/+archive/ubuntu/dnscrypt)
+
 On OSX, libsodium can be installed with
 
     brew install libsodium

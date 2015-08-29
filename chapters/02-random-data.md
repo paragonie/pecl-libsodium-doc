@@ -5,6 +5,8 @@ for various purposes (encryption keys, nonces, etc). Libsodium has you covered.
 
 <h3 id="randombytes-buf">Random Bytes</h3>
 
+> `string \Sodium\randombytes_bytes(int $number)`
+
 If you need a string consisting of random bytes, you can use `\Sodium\randombytes_buf()`.
 
     $string = \Sodium\randombytes_buf($num_bytes);
@@ -14,6 +16,8 @@ byte will be the character respresentation of a random value between 0 and 255.
 
 <h3 id="randombytes-buf">Random Integers</h3>
 
+> `int \Sodium\randombytes_uniform(int $range)`
+
 If you need a uniformly distributed random integer between 0 and a particular
 upper bound, you can use `\Sodium\randombytes_uniform()`.
 
@@ -21,9 +25,10 @@ For example, if you need a number between 1 and 100:
 
     $int = \Sodium\randombytes_uniform(100) + 1;
 
-Note that, in the above example, the possible values of `$int` range from 1 to 100
-because `randombytes_uniform` will return a random integer between 0 and 99. 100
-is **not** included in the possible output values.
+Note that, in the above example, the possible values of `$int` range from 1 to 
+100 because `\Sodium\randombytes_uniform` will return a random integer between 0
+and 99. 100 is **not** included in the possible output values for 
+`\Sodium\randombytes_uniform(100)`.
 
 > Unlike `rand() % $n`, the distribution of the output values is uniform. You
 > want a uniform distribution for a cryptographically secure pseudorandom
@@ -33,6 +38,8 @@ The maximum possible value for $n is `2147483647`, *not* `PHP_INT_MAX`.
 
 <h3 id="randombytes-buf">Random 16-bit Integers</h3>
 
+> `int \Sodium\randombytes_random16()`
+
 Returns an integer between 0 and 65535, following a uniform distribution.
 
     \Sodium\randombytes_random16();
@@ -40,3 +47,4 @@ Returns an integer between 0 and 65535, following a uniform distribution.
 ### Extra Information
 
 * [How to Safely Generate a Random Number](http://sockpuppet.org/blog/2014/02/25/safely-generate-random-numbers/) (libsodium uses urandom)
+* [How to Safely Generate Random Strings and Integers in PHP](https://paragonie.com/blog/2015/07/how-safely-generate-random-strings-and-integers-in-php)
