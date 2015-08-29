@@ -15,6 +15,13 @@
                 "title": "Installing Libsodium and the PHP extension",
                 "anchor": "installing-libsodium"
             }
+        ],
+        "tags": [
+            "libsodium",
+            "introduction",
+            "installing",
+            "install",
+            "install-guide"
         ]
     },
     {
@@ -25,6 +32,10 @@
                 "title": "Which Tool to Use, for Which Purpose",
                 "anchor": "which-tool"
             }
+        ],
+        "tags": [
+            "libsodium",
+            "quick-start"
         ]
     },
     {
@@ -43,6 +54,14 @@
                 "title": "Random 16-bit Integers",
                 "anchor": "randombytes-random16"
             }
+        ],
+        "tags": [
+            "libsodium",
+            "random-data",
+            "random-bytes",
+            "random-int",
+            "csprng",
+            "entropy"
         ]
     },
     {
@@ -69,6 +88,11 @@
                 "title": "Constant-Time Memory Comparison",
                 "anchor": "memcmp"
             }
+        ],
+        "tags": [
+            "libsodium",
+            "utilities",
+            "helpers"
         ]
     },
     {
@@ -83,6 +107,12 @@
                 "title": "Secret-key Authentication",
                 "anchor": "crypto-auth"
             }
+        ],
+        "tags": [
+            "libsodium",
+            "secret-key-cryptography",
+            "encryption",
+            "authentication"
         ]
     },
     {
@@ -97,6 +127,12 @@
                 "title": "Public-key Signatures",
                 "anchor": "crypto-sign"
             }
+        ],
+        "tags": [
+            "libsodium",
+            "public-key-cryptography",
+            "encryption",
+            "digital-signature"
         ]
     },
     {
@@ -111,6 +147,12 @@
                 "title": "Short Hashing",
                 "anchor": "crypto-shorthash"
             }
+        ],
+        "tags": [
+            "libsodium",
+            "cryptographic-hash",
+            "hash-functions",
+            "hash"
         ]
     },
     {
@@ -129,6 +171,11 @@
                 "title": "Key Derivation",
                 "anchor": "crypto-pwhash-scryptsalsa208sha256"
             }
+        ],
+        "tags": [
+            "libsodium",
+            "passwords",
+            "password-hash"
         ]
     },
     {
@@ -159,6 +206,14 @@
                 "title": "Unauthenticated Secret-key Encryption (Dangerous)",
                 "anchor": "crypto-stream"
             }
+        ],
+        "tags": [
+            "libsodium",
+            "advanced-features",
+            "sealed-logs",
+            "aead",
+            "ecdh",
+            "elliptic-curve-diffie-hellman"
         ]
     },
     {
@@ -169,6 +224,12 @@
                 "title": "Sealed application security reports",
                 "anchor": "sealed-logs"
             }
+        ],
+        "tags": [
+            "libsodium",
+            "recipes",
+            "common-problems",
+            "examples"
         ]
     }
 ]
