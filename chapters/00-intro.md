@@ -55,6 +55,8 @@ and and understood [basic cryptography concepts](https://paragonie.com/blog/2015
 * **Key**:  
   In cryptography, a key is a piece of information that determines the output of
   a cryptographic algorithm.
+* **Nonce**:  
+  A number that should only be used once (i.e. for a given key or set of keys).
 * **Cryptographic hash functions** (hashes):  
   A deterministic one-way transformation of variable-length data into a fixed-size
   output -- by itself, a hash function does not use a key.
