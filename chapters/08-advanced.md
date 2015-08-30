@@ -22,6 +22,6 @@
 
 
 
-<h3 id="crypto-stream">Unauthenticated Secret-key Encryption (Dangerous)</h3>
+<h3 id="crypto-stream">Secret-key Encryption (Unauthenticated)</h3>
 
 

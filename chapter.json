@@ -100,7 +100,7 @@
         "source": "04-secretkey-crypto.md",
         "sections": [
             {
-                "title": "Authenticated Secret-key Encryption",
+                "title": "Secret-key Authenticated Encryption",
                 "anchor": "crypto-secretbox"
             },
             {
@@ -203,7 +203,7 @@
                 "anchor": "crypto-kx"
             },
             {
-                "title": "Unauthenticated Secret-key Encryption (Dangerous)",
+                "title": "Secret-key Encryption (Unauthenticated)",
                 "anchor": "crypto-stream"
             }
         ],

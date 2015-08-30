@@ -52,5 +52,6 @@ Returns an integer between 0 and 65535 (inclusive), following a uniform distribu
 
 ### Extra Information
 
+* [Libsodium documentation: Generating random data](https://download.libsodium.org/doc/generating_random_data/index.html)
 * [How to Safely Generate a Random Number](http://sockpuppet.org/blog/2014/02/25/safely-generate-random-numbers/) (libsodium uses urandom)
 * [How to Safely Generate Random Strings and Integers in PHP](https://paragonie.com/blog/2015/07/how-safely-generate-random-strings-and-integers-in-php)

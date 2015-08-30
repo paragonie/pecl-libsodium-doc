@@ -71,6 +71,7 @@ Example:
 
 ### Extra Information
 
+* [Libsodium documentation: Helpers](https://download.libsodium.org/doc/helpers/index.html)
 * [How to zero a buffer](http://www.daemonology.net/blog/2014-09-04-how-to-zero-a-buffer.html)
 * [Zeroing buffers is insufficient](http://www.daemonology.net/blog/2014-09-06-zeroing-buffers-is-insufficient.html)
 * [Coding rules for secure cryptography development](https://cryptocoding.net/index.php/Coding_rules)
