@@ -47,7 +47,7 @@ and `$memlimit`.
 
 -----
 
-> `bool \Sodium\crypto_pwhash_scryptsalsa208sha256_str_verify(string $hash_str, string $password);
+> `bool \Sodium\crypto_pwhash_scryptsalsa208sha256_str_verify(string $hash_str, string $password)`
 
 Returns `TRUE` if the password matches the given hash.
 
