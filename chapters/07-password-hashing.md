@@ -31,7 +31,7 @@ version.
 
 <h3 id="crypto-pwhash-scryptsalsa208sha256-str">Scrypt Password Hashing and Verification</h3>
 
-> `string \Sodium\crypto_pwhash_scryptsalsa208sha256_str(string $password, int $opslimit, int $memlimit);
+> `string \Sodium\crypto_pwhash_scryptsalsa208sha256_str(string $password, int $opslimit, int $memlimit)`
 
 This uses the scrypt key derivation function to generate a storable password
 hash. It's highly recommended that you use the provided constants for `$opslimit`
@@ -65,16 +65,10 @@ Returns `TRUE` if the password matches the given hash.
 
 <h3 id="crypto-pwhash-scryptsalsa208sha256">Key Derivation</h3>
 
+> `string \Sodium\crypto_pwhash_scryptsalsa208sha256(int $output_length, string $password, string $salt, int $opslimit, int $memlimit)`
+
 If you need to derive an encryption key (e.g. for [`crypto_sign_seed_keypair()`](05-publickey-crypto.md#crypto-sign-seed-keypair))
 from a user-provided password, you can invoke this function directly.
-
-    string \Sodium\crypto_pwhash_scryptsalsa208sha256(
-        int $output_length,
-        string $password,
-        string $salt,
-        int $opslimit,
-        int $memlimit
-    );
 
 For each key, you must use a unique and unpredictable salt (which should be stored
 for re-use).
