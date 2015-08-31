@@ -230,8 +230,12 @@
         "source": "09-recipes.md",
         "sections": [
             {
-                "title": "Sealed application security reports",
+                "title": "Sealed Application Security Logs",
                 "anchor": "sealed-logs"
+            },
+            {
+                "title": "Encrypted Cookies",
+                "anchor": "encrypted-cookies"
             }
         ],
         "tags": [
