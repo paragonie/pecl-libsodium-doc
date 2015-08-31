@@ -168,7 +168,7 @@ you can use `crypto_sign_seed_keypair`.
     $bob_seed = \Sodium\randombytes_buf(\Sodium\CRYPTO_SIGN_SEEDBYTES);
     $bob_sign_kp = \Sodium\crypto_sign_seed_keypair($bob_seed);
 
-#### Extra Information
+### Extra Information
 
 * [Libsodium documentation: Public-key authenticated encryption](https://download.libsodium.org/doc/public-key_cryptography/authenticated_encryption.html)
 * [Libsodium documentation: Public-key signatures](https://download.libsodium.org/doc/public-key_cryptography/public-key_signatures.html)
