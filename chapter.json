@@ -196,6 +196,14 @@
                 "anchor": "crypto-aead-chacha20poly1305"
             },
             {
+                "title": "Secret-key Encryption (Unauthenticated)",
+                "anchor": "crypto-stream"
+            },
+            {
+                "title": "Sealed boxes (Anonymous Public-key Encryption)",
+                "anchor": "crypto-box-seal"
+            },
+            {
                 "title": "Scalar multiplication (Elliptic Curve Cryptography)",
                 "anchor": "crypto-scalarmult"
             },
@@ -206,10 +214,6 @@
             {
                 "title": "Elliptic Curve Diffie Hellman Key Exchange",
                 "anchor": "crypto-kx"
-            },
-            {
-                "title": "Secret-key Encryption (Unauthenticated)",
-                "anchor": "crypto-stream"
             }
         ],
         "tags": [
