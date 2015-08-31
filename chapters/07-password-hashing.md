@@ -63,7 +63,7 @@ Returns `TRUE` if the password matches the given hash.
         // Password was invalid.
     }
 
-<h3 id="crypto-pwhash-scryptsalsa208sha256">Key Derivation</h3>
+<h3 id="crypto-pwhash-scryptsalsa208sha256">Scrypt Key Derivation</h3>
 
 > `string \Sodium\crypto_pwhash_scryptsalsa208sha256(int $output_length, string $password, string $salt, int $opslimit, int $memlimit)`
 

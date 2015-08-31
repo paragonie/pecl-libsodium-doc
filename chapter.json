@@ -173,7 +173,7 @@
                 "anchor": "crypto-pwhash-scryptsalsa208sha256-str"
             },
             {
-                "title": "Key Derivation",
+                "title": "Scrypt Key Derivation",
                 "anchor": "crypto-pwhash-scryptsalsa208sha256"
             }
         ],
