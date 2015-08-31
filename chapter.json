@@ -128,7 +128,7 @@
                 "anchor": "crypto-sign"
             },
             {
-                "title": "Generating a `crypto_sign` Key-pair from a Seed",
+                "title": "Generating a crypto_sign Key-pair from a Seed",
                 "anchor": "crypto-sign-seed-keypair"
             }
         ],
