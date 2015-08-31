@@ -1,9 +1,11 @@
 # Basic Secret-key Cryptography
 
-Secret-key encryption is used when only the intended participants of a
+Secret-key cryptography is used when only the intended participants of a
 communication are in possession of the same secret key. This can be the result
-of a shared password (see Chapter 7) or Diffie Hellman key agreement (see 
-Chapter 9).
+of a shared password (see [Chapter 8](07-password-hashing.md)) or Diffie Hellman key agreement (see 
+[Chapter 9](08-advanced.md#crypto-kx)).
+
+**Contrast with [Public-key cryptography](05-publickey-crypto.md).**
 
 <h3 id="crypto-secretbox">Secret-key Authenticated Encryption</h3>
 
@@ -39,7 +41,7 @@ with the same key. The easiest way to generate a nonce is to use `randombytes_bu
 
 <h4 id="crypto-secretbox-open">Decrypt a message</h4>
 
-> `string \Sodium\crypto_secretbox_open(string $ciphertext, string $nonce, string $key)`
+> `string|bool \Sodium\crypto_secretbox_open(string $ciphertext, string $nonce, string $key)`
 
 Decrypting a message requires the same nonce and key that was used to encrypt it.
 
@@ -82,10 +84,12 @@ constant-time and side-channel resistant.
     if (\Sodium\crypto_auth_verify($mac, $message, $key)) {
         $data = json_decode($message, true);
     } else {
-        throw new Exception("Bad message");
+        \Sodium\memzero($key);
+        throw new Exception("Malformed message or invalid MAC");
     }
 
 ### Extra Information
 
+* [Libsodium documentation: Secret-key authenticated encryption](https://download.libsodium.org/doc/secret-key_cryptography/authenticated_encryption.html)
 * [Libsodium documentation: Secret-key authentication](https://download.libsodium.org/doc/secret-key_cryptography/secret-key_authentication.html)
 
