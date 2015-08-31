@@ -193,8 +193,8 @@ Compute a shared secret using Elliptic Curve Diffie Hellman over Curve25519.
 
     // Bob's computer:
     $bob_sharedsecret = \Sodium\crypto_kx(
-        $bob_box_secretkey, $box_box_publickey,
-        $bob_box_publickey, $alice_box_publickey
+        $bob_box_secretkey, $alice_box_publickey,
+        $alice_box_publickey, $bob_box_publickey
     );
 
 
