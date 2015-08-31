@@ -157,7 +157,7 @@ Instead of returning a signed message, this function only returns the signature.
         throw new Exception("Invalid signature");
     }
 
-<h3 id="crypto-sign-seed-keypair">Generating a `crypto_sign` Key-pair from a Seed</h3>
+<h3 id="crypto-sign-seed-keypair">Generating a <code>crypto_sign</code> Key-pair from a Seed</h3>
 
 > `string \Sodium\crypto_sign_seed_keypair(string $seed);`
 
