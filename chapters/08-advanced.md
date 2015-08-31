@@ -1,4 +1,4 @@
-# Advanced
+# Advanced Libsodium Features
 
 The functions documented in this chapter are meant for advanced developers. Some
 of the functions can be *dangerous* if used improperly, and thus their uses are
@@ -114,19 +114,95 @@ care to never repeat a nonce with the same key.
 
 <h3 id="crypto-box-seal">Sealed boxes (Anonymous Public-key Encryption)</h3>
 
+Sealed boxes are designed to anonymously send messages to a recipient given its
+public key.
 
+Only the recipient can decrypt these messages, using its private key. While the
+recipient can verify the integrity of the message, it cannot verify the identity
+of the sender.
+
+A message is encrypted using an ephemeral key pair, whose secret part is
+destroyed right after the encryption process.
+
+Without knowing the secret key used for a given message, the sender cannot 
+decrypt its own message later. And without additional data, a message cannot be
+correlated with the identity of its sender.
+
+#### Sealed Box Encryption
+
+> `string \Sodium\crypto_box_seal(string $message, string $publickey)`
+
+This will encrypt a message with a user's public key.
+
+    $anonymous_message_to_bob = \Sodium\crypto_box_seal(
+        $message,
+        $bob_box_publickey
+    );
+
+#### Sealed Box Decryption
+
+> `string \Sodium\crypto_box_seal_open(string $message, string $secretkey)`
+
+Opens a sealed box with your secret key.
+
+    $decrypted_message = \Sodium\crypto_box_seal_open(
+        $anonymous_message_to_bob,
+        $bob_box_secretkey
+    );
 
 <h3 id="crypto-scalarmult">Scalar multiplication (Elliptic Curve Cryptography)</h3>
 
+Sodium provides an API for Curve25519, a state-of-the-art Diffie-Hellman 
+function suitable for a wide variety of applications.
 
+> `string \Sodium\crypto_scalarmult(string $key_1, string $key_2)`
+
+The `crypto_scalarmult` API allows deriving a shared secret from your secret key
+and the other user's public key. It also allows the derivation of your public
+key from your secret key.
 
 <h4 id="public-key-from-secret-key">Get Public-key from Secret-key</h3>
 
+> `string \Sodium\crypto_box_publickey_from_secretkey(string $secretkey)`
 
+This is pretty straightforward.
+
+    $alice_box_publickey = \Sodium\crypto_box_publickey_from_secretkey(
+        $alice_box_secretkey
+    );
+
+> `string \Sodium\crypto_box_publickey_from_secretkey(string $secretkey)`
+
+As above, but with `crypto_sign` instead of `crypto_box`:
+
+    $alice_sign_publickey = \Sodium\crypto_sign_publickey_from_secretkey(
+        $alice_sign_secretkey
+    );
 
 <h4 id="crypto-kx">Elliptic Curve Diffie Hellman Key Exchange</h4>
+
+> `string \Sodium\crypto_kx(string $secretkey, string $publickey, string $client_publickey, string $server_publickey)`
+
+Compute a shared secret using Elliptic Curve Diffie Hellman over Curve25519.
+
+    // Alice's computer:
+    $alice_sharedsecret = \Sodium\crypto_kx(
+        $alice_box_secretkey, $bob_box_publickey,
+        $alice_box_publickey, $bob_box_publickey
+    );
+
+    // Bob's computer:
+    $bob_sharedsecret = \Sodium\crypto_kx(
+        $bob_box_secretkey, $box_box_publickey,
+        $bob_box_publickey, $alice_box_publickey
+    );
 
 
 ### Extra information
 
+* Relevant Libsodium Documentation Pages:
+  * [Sodium `crypto_aead`](https://download.libsodium.org/doc/secret-key_cryptography/aead.html)
+  * [Sodium `crypto_stream`](https://download.libsodium.org/doc/advanced/xsalsa20.html)
+  * [Sodium `crypto_box_seal`](https://download.libsodium.org/doc/public-key_cryptography/sealed_boxes.html)
+  * [Sodium `crypto_scalarmult`](https://download.libsodium.org/doc/advanced/scalar_multiplication.html)
 * [CAESAR: Competition for Authenticated Encryption: Security, Applicability, and Robustness](http://competitions.cr.yp.to/caesar.html)

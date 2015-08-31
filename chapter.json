@@ -184,7 +184,7 @@
         ]
     },
     {
-        "title": "Advanced",
+        "title": "Advanced Libsodium Features",
         "source": "08-advanced.md",
         "sections": [
             {
