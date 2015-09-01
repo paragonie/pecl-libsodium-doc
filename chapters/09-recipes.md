@@ -11,12 +11,12 @@ skepticism and discretion before implementing any of the functions on this page.
 <h3 id="sealed-logs">Sealed Application Security Reports</h3>
 
 **Problem:** Encrypt application logs such that only administrators can read
-the contents of the message. An attacker that has compromised the endpoint
-and captured some of the outgoing log traffic.
+the contents of the message.
 
 **Desired Solution:** Ensure that the attacker will be unable to read any of the
 messages that went out (and thus won't know what the administrators know about
-his/her activity).
+his/her activity). We can't stop the attacker from sending false logs after that
+point.
 
 This strategy combines both [`\Sodium\crypto_box_seal()`](08-advanced.md#08-advanced.md#crypto-box-seal)
 and [`\Sodium\crypto_sign()`](05-publickey-crypto.md#crypto-sign).
@@ -74,7 +74,7 @@ alter its contents.
 
 **Desired Solution:** Authenticated secret-key encryption, wherein the nonce is
 stored with the ciphertext. Each encryption and authentication key should be
-attached to the 
+attached to the cookie name.
 
 This strategy combines both [`\Sodium\crypto_stream_xor()`](08-advanced.md#crypto-stream)
 with [`\Sodium\crypto_auth()`](04-secretkey-crypto.md#crypto-auth).
