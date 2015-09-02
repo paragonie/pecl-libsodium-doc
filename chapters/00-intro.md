@@ -97,6 +97,16 @@ of these PPAs to get libsodium installed:
 * [https://answers.launchpad.net/~chris-lea/+archive/ubuntu/libsodium](https://answers.launchpad.net/~chris-lea/+archive/ubuntu/libsodium)
 * [https://launchpad.net/~anton+/+archive/ubuntu/dnscrypt](https://launchpad.net/~anton+/+archive/ubuntu/dnscrypt)
 
+For example:
+
+    # If this doesn't work...
+        sudo add-apt-repository: ppa:chris-lea/ppa
+    # Run these two lines instead...
+        sudo echo "deb http://ppa.launchpad.net/chris-lea/libsodium/ubuntu precise main" >> /etc/apt/sources.list
+        sudo echo "deb-src http://ppa.launchpad.net/chris-lea/libsodium/ubuntu precise main" >> /etc/apt/sources.list
+    # Finally...
+    sudo apt-get update && sudo apt-get intsall libsodium
+
 On OSX, libsodium can be installed with
 
     brew install libsodium
