@@ -37,6 +37,14 @@ must generate a keypair.
         $bob_sign_secretkey = \Sodium\crypto_sign_secretkey($bob_sign_kp);
         $bob_sign_publickey = \Sodium\crypto_sign_publickey($bob_sign_kp);
 
+    // Optionally, you can reassemble a keypair string from a secret key and 
+    // public key pair:
+    
+    $keypair = \Sodium\crypto_box_keypair_from_secretkey_and_publickey(
+        $alice_box_secretkey,
+        $alice_box_publickey
+    );
+
 In the examples below, you are Alice and you are trying to talk to Bob.
 
 <h3 id="crypto-box">Public-key Authenticated Encryption</h3>
@@ -98,7 +106,7 @@ that it came from you (or someone in possession of the correct secret key).
 
 You can use the `crypto_sign` API in two modes: combined (default) or detached.
 
-#### Signing a message (`crypto_sign`)
+#### Signing a message
 
 > `string \Sodium\crypto_sign(string $message, string $secretkey)`
 
@@ -111,7 +119,7 @@ This returns the message and the signature all in one string.
         $alice_sign_secretkey
     );
 
-#### Verifying a message (`crypto_sign_open`)
+<h4 id="crypto-sign-open">Verifying a message</h4>
 
 > `string|bool \Sodium\crypto_sign_open(string $message, string $publickey)`
 
@@ -129,7 +137,7 @@ message.
         echo $original_msg; // Displays "This comes from Alice."
     }
 
-#### Detached message signing (`crypto_sign_detached`)
+<h4 id="crypto-sign-detached">Detached message signing</h4>
 
 > `string \Sodium\crypto_sign_detached(string $message, string $secretkey)`
 
@@ -141,7 +149,7 @@ Instead of returning a signed message, this function only returns the signature.
         $alice_sign_secretkey
     );
 
-#### Detached signature verification (`crypto_sign_verify_detached`)
+<h4 id="crypto-sign-verify-detached">Detached signature verification</h4>
 
 > `bool \Sodium\crypto_sign_verify_detached(string $signature, string $message, string $publickey)`
 

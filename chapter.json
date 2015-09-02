@@ -31,6 +31,10 @@
             {
                 "title": "Which Tool to Use, for Which Purpose",
                 "anchor": "which-tool"
+            },
+            {
+                "title": "Libsodium Functions",
+                "anchor": "function-index"
             }
         ],
         "tags": [

@@ -171,7 +171,10 @@ This is pretty straightforward.
         $alice_box_secretkey
     );
 
-> `string \Sodium\crypto_box_publickey_from_secretkey(string $secretkey)`
+The function `\Sodium\crypto_scalarmult_base()` is an alias for
+`\Sodium\crypto_box_publickey_from_secretkey()`.
+
+> `string \Sodium\crypto_sign_publickey_from_secretkey(string $secretkey)`
 
 As above, but with `crypto_sign` instead of `crypto_box`:
 
