@@ -5,7 +5,16 @@ you can immediately begin using it to develop secure web applications.
 
 <h3 id="which-tool">Which Tool to Use, for Which Purpose</h3>
 
+Deciding which libsodium feature to use for a given purpose is relatively
+straightforward, provided you keep these guidelines in mind:
 
+* Prioritize the basic features (e.g. `crypto_box` and `crypto_secretbox`) over
+  advanced features (e.g. `crypto_stream_xor`).
+* If a more appropriate feature exists (e.g. `crypto_pwhash_*` instead of 
+  `crypto_generichash`), don't use a less appropriate one.
+* [Avoid deploying or publishing your own cryptographic constructions](http://www.cryptofails.com/post/75204435608/write-crypto-code-dont-publish-it)
+  (e.g. generally, you should use `crypto_secretbox` instead of `crypto_stream_xor`
+  then `crypto_auth`).
 
 <h3 id="function-index">Libsodium Functions</h3>
 

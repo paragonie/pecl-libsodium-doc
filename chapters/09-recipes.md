@@ -1,12 +1,15 @@
 # Recipes
 
-This page contains recipes from Paragon Initiative Enterprises for using the
-features provided by Libsodium to add security to common web application
-features. 
+This page contains recipes from [Paragon Initiative Enterprises](https://paragonie.com)
+for using the functions provided by Libsodium to add security to common web
+application features.
 
 These are not officially part of the API documentation, but should give power 
 users an idea on how to combine features safely and effectively. Please exercise
 skepticism and discretion before implementing any of the functions on this page.
+
+You can treat all of the recipes on this page as if it were released under the
+MIT license.
 
 <h3 id="sealed-logs">Sealed Application Security Reports</h3>
 
@@ -66,6 +69,18 @@ signature.
         $unsealed,
         $node_publickey
     );
+
+And then the contents of `$verified` is a specific message from a specific node.
+
+**Important:** We can get away with signing then encrypting (and then decrypting
+then verifying the signature) without running afoul of the [Cryptographic Doom Principle](http://www.thoughtcrime.org/blog/the-cryptographic-doom-principle/)
+only because our ciphertext is authenticated.
+
+    crypto_sign | crypto_box_seal 
+    Sign       -> Encrypt -> MAC
+
+If `\Sodium\crypto_box_seal` did not offer authenticated encryption, this would
+be a dangerous construction. Fortunately, it does. **Always Encrypt then MAC!**
 
 <h3 id="encrypted-cookies">Encrypted Cookies</h3>
 
