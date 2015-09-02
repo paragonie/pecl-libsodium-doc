@@ -57,343 +57,347 @@ extension.
 * [\Sodium\increment()](03-utilities-helpers.md#increment)
 * \Sodium\library_version_major()
 * \Sodium\library_version_minor()
-* [\Sodium\memcmp](03-utilities-helpers.md#memcmp)
+* [\Sodium\memcmp()](03-utilities-helpers.md#memcmp)
 * [\Sodium\memzero()](03-utilities-helpers.md#memzero)
 * \Sodium\version_string()
 
 <h3 id="constant-index">Libsodium Constants</h3>
 
-<table class="responsive">
-    <tr>
-        <th>Constant</th>
-        <th>Value</th>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_KEYBYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_NSECBYTES</code>
-        </td>
-        <td>
-            0
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_NPUBBYTES</code>
-        </td>
-        <td>
-            8
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_ABYTES</code>
-        </td>
-        <td>
-            16
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_AUTH_BYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_AUTH_KEYBYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_BOX_SEALBYTES</code>
-        </td>
-        <td>
-            16
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_BOX_SECRETKEYBYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_BOX_PUBLICKEYBYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_BOX_KEYPAIRBYTES</code>
-        </td>
-        <td>
-            64
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_BOX_MACBYTES</code>
-        </td>
-        <td>
-            16
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_BOX_NONCEBYTES</code>
-        </td>
-        <td>
-            24
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_KX_BYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_KX_PUBLICKEYBYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_KX_SECRETKEYBYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_GENERICHASH_BYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_GENERICHASH_BYTES_MIN</code>
-        </td>
-        <td>
-            16
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_GENERICHASH_BYTES_MAX</code>
-        </td>
-        <td>
-            64
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_GENERICHASH_KEYBYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_GENERICHASH_KEYBYTES_MIN</code>
-        </td>
-        <td>
-            16
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_GENERICHASH_KEYBYTES_MAX</code>
-        </td>
-        <td>
-            64
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_SALTBYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_STRPREFIX</code>
-        </td>
-        <td>
-            $7$
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_INTERACTIVE</code>
-        </td>
-        <td>
-            534288
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_MEMLIMIT_INTERACTIVE</code>
-        </td>
-        <td>
-            16777216
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_SENSITIVE</code>
-        </td>
-        <td>
-            16777216
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_MEMLIMIT_SENSITIVE</code>
-        </td>
-        <td>
-            16777216
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_SCALARMULT_BYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_SCALARMULT_SCALARBYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_SHORTHASH_BYTES</code>
-        </td>
-        <td>
-            8
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_SHORTHASH_KEYBYTES</code>
-        </td>
-        <td>
-            16
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_SECRETBOX_KEYBYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_SECRETBOX_MACBYTES</code>
-        </td>
-        <td>
-            16
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_SECRETBOX_NONCEBYTES</code>
-        </td>
-        <td>
-            24
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_SIGN_BYTES</code>
-        </td>
-        <td>
-            64
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_SIGN_SEEDBYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_SIGN_PUBLICKEYBYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_SIGN_SECRETKEYBYTES</code>
-        </td>
-        <td>
-            64
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_SIGN_KEYPAIRBYTES</code>
-        </td>
-        <td>
-            96
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_STREAM_KEYBYTES</code>
-        </td>
-        <td>
-            32
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <code class="php">\Sodium\CRYPTO_STREAM_NONCEBYTES</code>
-        </td>
-        <td>
-            24
-        </td>
-    </tr>
+<table class="table table-striped responsive">
+    <thead>
+        <tr>
+            <th>Constant</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_KEYBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_NSECBYTES</code>
+            </td>
+            <td class="const_value">
+                0
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_NPUBBYTES</code>
+            </td>
+            <td class="const_value">
+                8
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_ABYTES</code>
+            </td>
+            <td class="const_value">
+                16
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AUTH_BYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AUTH_KEYBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_BOX_SEALBYTES</code>
+            </td>
+            <td class="const_value">
+                16
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_BOX_SECRETKEYBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_BOX_PUBLICKEYBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_BOX_KEYPAIRBYTES</code>
+            </td>
+            <td class="const_value">
+                64
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_BOX_MACBYTES</code>
+            </td>
+            <td class="const_value">
+                16
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_BOX_NONCEBYTES</code>
+            </td>
+            <td class="const_value">
+                24
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_KX_BYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_KX_PUBLICKEYBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_KX_SECRETKEYBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_GENERICHASH_BYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_GENERICHASH_BYTES_MIN</code>
+            </td>
+            <td class="const_value">
+                16
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_GENERICHASH_BYTES_MAX</code>
+            </td>
+            <td class="const_value">
+                64
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_GENERICHASH_KEYBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_GENERICHASH_KEYBYTES_MIN</code>
+            </td>
+            <td class="const_value">
+                16
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_GENERICHASH_KEYBYTES_MAX</code>
+            </td>
+            <td class="const_value">
+                64
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_SALTBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_STRPREFIX</code>
+            </td>
+            <td class="const_value">
+                $7$
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_INTERACTIVE</code>
+            </td>
+            <td class="const_value">
+                534288
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_MEMLIMIT_INTERACTIVE</code>
+            </td>
+            <td class="const_value">
+                16777216
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_SENSITIVE</code>
+            </td>
+            <td class="const_value">
+                16777216
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_MEMLIMIT_SENSITIVE</code>
+            </td>
+            <td class="const_value">
+                16777216
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_SCALARMULT_BYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_SCALARMULT_SCALARBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_SHORTHASH_BYTES</code>
+            </td>
+            <td class="const_value">
+                8
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_SHORTHASH_KEYBYTES</code>
+            </td>
+            <td class="const_value">
+                16
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_SECRETBOX_KEYBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_SECRETBOX_MACBYTES</code>
+            </td>
+            <td class="const_value">
+                16
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_SECRETBOX_NONCEBYTES</code>
+            </td>
+            <td class="const_value">
+                24
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_SIGN_BYTES</code>
+            </td>
+            <td class="const_value">
+                64
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_SIGN_SEEDBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_SIGN_PUBLICKEYBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_SIGN_SECRETKEYBYTES</code>
+            </td>
+            <td class="const_value">
+                64
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_SIGN_KEYPAIRBYTES</code>
+            </td>
+            <td class="const_value">
+                96
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_STREAM_KEYBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_STREAM_NONCEBYTES</code>
+            </td>
+            <td class="const_value">
+                24
+            </td>
+        </tr>
+    </tbody>
 </table>

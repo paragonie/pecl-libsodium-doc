@@ -35,6 +35,10 @@
             {
                 "title": "Libsodium Functions",
                 "anchor": "function-index"
+            },
+            {
+                "title": "Libsodium Constants",
+                "anchor": "constant-index"
             }
         ],
         "tags": [
