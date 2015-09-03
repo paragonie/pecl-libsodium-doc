@@ -122,9 +122,24 @@ with [`\Sodium\crypto_auth()`](04-secretkey-crypto.md#crypto-auth).
             $cookie = \Sodium\hex2bin($_COOKIE[$index]);
             list ($encKey, $authKey) = $this->splitKeys($index);
             
-            $mac = mb_substr($cookie, 0, \Sodium\CRYPTO_AUTH_BYTES);
-            $nonce = mb_substr($cookie, \Sodium\CRYPTO_AUTH_BYTES, \Sodium\CRYPTO_STREAM_NONCEBYTES);
-            $ciphertext = mb_substr($cookie, \Sodium\CRYPTO_AUTH_BYTES + \Sodium\CRYPTO_STREAM_NONCEBYTES);
+            $mac = mb_substr(
+                $cookie, 
+                0,
+                \Sodium\CRYPTO_AUTH_BYTES,
+                '8bit'
+            );
+            $nonce = mb_substr(
+                $cookie,
+                \Sodium\CRYPTO_AUTH_BYTES,
+                \Sodium\CRYPTO_STREAM_NONCEBYTES,
+                '8bit'
+            );
+            $ciphertext = mb_substr(
+                $cookie,
+                \Sodium\CRYPTO_AUTH_BYTES + \Sodium\CRYPTO_STREAM_NONCEBYTES,
+                null,
+                '8bit'
+            );
 
             if (\Sodium\crypto_auth_verify($mac, $nonce . $ciphertext, $authKey)) {
                 \Sodium\memzero($authKey);
@@ -190,6 +205,7 @@ with [`\Sodium\crypto_auth()`](04-secretkey-crypto.md#crypto-auth).
                 $this->key,
                 \Sodium\CRYPTO_SECRETBOX_KEYBYTES
             );
+            return [$encKey, $authKey];
         }
     }
 
