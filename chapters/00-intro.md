@@ -135,7 +135,7 @@ the PHP extension. The easiest way to do this is to install the PECL package.
 
 You can get PECL libsodium by running this command.
 
-    pecl install libsodium-beta
+    pecl install libsodium
 
 And add the following line to your `php.ini` file:
 
