@@ -285,7 +285,7 @@ extension.
                 <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_SENSITIVE</code>
             </td>
             <td class="const_value">
-                16777216
+                33554432
             </td>
         </tr>
         <tr>
@@ -293,7 +293,7 @@ extension.
                 <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_MEMLIMIT_SENSITIVE</code>
             </td>
             <td class="const_value">
-                16777216
+                1073741824
             </td>
         </tr>
         <tr>
