@@ -85,7 +85,7 @@ binary string that should only be used once).
         $bob_box_secretkey,
         $alice_box_publickey
     );
-    $plaintext = \Sodium\crypto_box(
+    $plaintext = \Sodium\crypto_box_open(
         $ciphertext,
         $nonce,
         $bob_to_alice_kp
