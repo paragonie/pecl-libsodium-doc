@@ -143,11 +143,15 @@ This will encrypt a message with a user's public key.
 
 > `string \Sodium\crypto_box_seal_open(string $message, string $secretkey)`
 
-Opens a sealed box with your secret key.
+Opens a sealed box with a keypair from your secret key and public key.
 
+    $bob_box_kp = \Sodium\crypto_box_keypair_from_secretkey_and_publickey(
+        $bob_box_seceretkey,
+        $bob_box_publickey
+    );
     $decrypted_message = \Sodium\crypto_box_seal_open(
         $anonymous_message_to_bob,
-        $bob_box_secretkey
+        $bob_box_kp
     );
 
 <h3 id="crypto-scalarmult">Scalar multiplication (Elliptic Curve Cryptography)</h3>

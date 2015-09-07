@@ -64,7 +64,7 @@ For example:
 On the logging server, you should first open the sealed box then verify the
 signature.
 
-    $unsealed = \Sodium\crypto_box_seal_open($message, $our_secret_key);
+    $unsealed = \Sodium\crypto_box_seal_open($message, $our_box_keypair);
     $verified = \Sodium\crypto_sign_open(
         $unsealed,
         $node_publickey
