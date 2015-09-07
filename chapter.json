@@ -244,6 +244,10 @@
             {
                 "title": "Encrypted Cookies",
                 "anchor": "encrypted-cookies"
+            },
+            {
+                "title": "Encrypted Password Hashes",
+                "anchor": "encrypted-password-hashes"
             }
         ],
         "tags": [

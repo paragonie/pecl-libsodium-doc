@@ -190,7 +190,7 @@ with [`\Sodium\crypto_auth()`](04-secretkey-crypto.md#crypto-auth).
          * Just an example. In a real system, you want to use HKDF for
          * key-splitting instead of just a keyed BLAKE2b hash.
          * 
-         * @param string Cookie Name
+         * @param string $cookieName Cookie Name
          * @return array(2) [encryption key, authentication key]
          */
         private function splitKeys($cookieName)
@@ -198,12 +198,12 @@ with [`\Sodium\crypto_auth()`](04-secretkey-crypto.md#crypto-auth).
             $encKey = \Sodium\crypto_generichash(
                 \Sodium\crypto_generichash('encryption', $cookieName),
                 $this->key,
-                \Sodium\CRYPTO_SECRETBOX_KEYBYTES
+                \Sodium\CRYPTO_STREAM_KEYBYTES
             );
             $authKey = \Sodium\crypto_generichash(
                 \Sodium\crypto_generichash('authentication', $cookieName),
                 $this->key,
-                \Sodium\CRYPTO_SECRETBOX_KEYBYTES
+                \Sodium\CRYPTO_AUTH_KEYBYTES
             );
             return [$encKey, $authKey];
         }
@@ -220,4 +220,117 @@ On the next page load:
         $value = $sc->read('sensitive');
     } catch (Exception $ex) {
         // Handle the exception here
+    }
+
+<h3 id="encrypted-password-hashes">Encrypted Password Hashes</h3>
+
+**Problem:** We want to hash passwords on our webserver, then encrypt them
+before storing them in our database server (which is on separate hardware).
+
+This strategy combines [`\Sodium\crypto_pwhash_scryptsalsa208sha256_*()`](07-password-hashing.md#crypto-pwhash-scryptsalsa208sha256-str)
+with the Encrypt-Then-MAC construction (as written above) to facilitate 
+authenticated secret-key encryption and password hash verification.
+
+    class PasswordStorage
+    {
+        /**
+         * Hash then encrypt a password
+         * 
+         * @param string $password   - The user's password
+         * @param string $secret_key - The master key for all passwords
+         * @return string
+         */
+        public function hash($password, $secret_key)
+        {
+            // First, let's calculate the hash
+            $hashed = \Sodium\crypto_pwhash_scryptsalsa208sha256_str(
+                $password,
+                \Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_INTERACTIVE,
+                \Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_MEMLIMIT_INTERACTIVE
+            );
+            
+            list ($encKey, $authKey) = $this->splitKeys($secret_key);
+            \Sodium\memzero($secret_key);
+
+            $nonce = \Sodium\randombytes_buf(
+                \Sodium\CRYPTO_STREAM_NONCEBYTES
+            );
+            
+            $ciphertext = \Sodium\crypto_stream_xor(
+                $hashed,
+                $nonce,
+                $encKey
+            );
+            
+            $mac = \Sodium\crypto_auth($nonce . $ciphertext, $authkey);
+
+            \Sodium\memzero($encKey);
+            \Sodium\memzero($authKey);
+
+            return \Sodium\bin2hex($mac . $nonce . $ciphertext);
+        }
+
+        /**
+         * Decrypt then verify a password
+         * 
+         * @param string $password   - The user-provided password
+         * @param string $stored     - The encrypted password hash
+         * @param string $secret_key - The master key for all passwords
+         */
+        public function verify($password, $stored, $secret_key)
+        {
+            $mac = mb_substr(
+                $stored, 
+                0,
+                \Sodium\CRYPTO_AUTH_BYTES,
+                '8bit'
+            );
+            $nonce = mb_substr(
+                $stored,
+                \Sodium\CRYPTO_AUTH_BYTES,
+                \Sodium\CRYPTO_STREAM_NONCEBYTES,
+                '8bit'
+            );
+            $ciphertext = mb_substr(
+                $stored,
+                \Sodium\CRYPTO_AUTH_BYTES + \Sodium\CRYPTO_STREAM_NONCEBYTES,
+                null,
+                '8bit'
+            );
+            
+            if (\Sodium\crypto_auth_verify($mac, $nonce . $ciphertext, $authKey)) {
+                \Sodium\memzero($authKey);
+                $hash_str = \Sodium\crypto_stream_xor($ciphertext, $nonce, $encKey);
+                \Sodium\memzero($encKey);
+                if ($hash_str !== false) {
+                    return \Sodium\crypto_pwhash_scryptsalsa208sha256_str_verify($hash_str, $password);
+                }
+            } else {
+                \Sodium\memzero($authKey);
+                \Sodium\memzero($encKey);
+            }
+            throw new Exception('Decryption failed.');
+        }
+        
+        /**
+         * Just an example. In a real system, you want to use HKDF for
+         * key-splitting instead of just a keyed BLAKE2b hash.
+         * 
+         * @param string $secret_key
+         * @return array(2) [encryption key, authentication key]
+         */
+        private function splitKeys($secret_key)
+        {
+            $encKey = \Sodium\crypto_generichash(
+                'encryption',
+                $secret_key,
+                \Sodium\CRYPTO_STREAM_KEYBYTES
+            );
+            $authKey = \Sodium\crypto_generichash(
+                'authentication',
+                $secret_key,
+                \Sodium\CRYPTO_AUTH_KEYBYTES
+            );
+            return [$encKey, $authKey];
+        }
     }
