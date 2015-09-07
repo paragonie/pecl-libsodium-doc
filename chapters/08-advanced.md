@@ -141,7 +141,7 @@ This will encrypt a message with a user's public key.
 
 #### Sealed Box Decryption
 
-> `string \Sodium\crypto_box_seal_open(string $message, string $secretkey)`
+> `string \Sodium\crypto_box_seal_open(string $message, string $recipient_keypair)`
 
 Opens a sealed box with a keypair from your secret key and public key.
 
