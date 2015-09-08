@@ -11,7 +11,7 @@ The functions on this page should be prioritized *above* what PHP 5 offers
 
 <h3 id="randombytes-buf">Random Bytes</h3>
 
-> `string \Sodium\randombytes_bytes(int $number)`
+> `string \Sodium\randombytes_buf(int $number)`
 
 If you need a string consisting of random bytes, you can use `\Sodium\randombytes_buf()`.
 
@@ -40,7 +40,7 @@ and 99. 100 is **not** included in the possible output values for
 > want a uniform distribution for a cryptographically secure pseudorandom
 > number generator.
 
-The maximum possible value for $n is `2147483647`, *not `PHP_INT_MAX`*.
+The maximum possible value for `$range` is `2147483647`, *not `PHP_INT_MAX`*.
 
 <h3 id="randombytes-buf">Random 16-bit Integers</h3>
 

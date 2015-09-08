@@ -10,23 +10,23 @@ your application needs.
 Libsodium offers a variant of PHP's `bin2hex()` feature designed to be resistant
 to side-channel attacks. You can use it just like PHP's `bin2hex()` function:
 
-    $hex_string = \Sodium\bin2hex(string $binary_string);
+    $hex_string = \Sodium\bin2hex($binary_string);
 
 <h3 id="hex2bin">Hexadecimal Decoding</h3>
 
-> `string \Sodium\bin2hex(string $hex, string $ignore = '')`
+> `string \Sodium\hex2bin(string $hex, string $ignore = '')`
 
 Similar to above, libsodium also offers a complementary function for the inverse
 operation.
 
-    $binary_string = \Sodium\hex2bin(string $hex_string);
+    $binary_string = \Sodium\hex2bin($hex_string);
 
 Libsodium's `hex2bin()` also accepts a second optional string argument for
 characters to ignore. This is useful if, for example, you want to convert an
 IPv6 address into a raw binary string without the : separators breaking your
 algorithm.
 
-    $binary = \Sodium\hex2bin(string $ipv6_addr, ':');
+    $binary = \Sodium\hex2bin($ipv6_addr, ':');
 
 Like `\Sodium\bin2hex()`, `\Sodium\hex2bin()` is resistant to side-channel
 attacks while PHP's built-in function is not.
@@ -42,7 +42,7 @@ the contents of a variable.
     \Sodium\memzero($message);
     \Sodium\memzero($key);
 
-<h3 id="increment">Incrementor For Sequential Nonces</h3>
+<h3 id="increment">Incrementor for Sequential Nonces</h3>
 
 > `void \Sodium\increment(&string $binary_string)`
 
