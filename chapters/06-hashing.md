@@ -63,7 +63,7 @@ In order to address this, Sodium provides the `crypto_shorthash()` function,
 which outputs short but unpredictable (without knowing the secret key) values
 suitable for picking a list in a hash table for a given key.
 
-    // $key must be \Sodium\CRYPTO_SHORTHASH_KEYBYTES (16 byes, 128 bits) long
+    // $key must be \Sodium\CRYPTO_SHORTHASH_KEYBYTES (16 bytes, 128 bits) long
     $h = \Sodium\crypto_shorthash('message', $key);
 
 This function has been optimized for short messages. Its short output length 
