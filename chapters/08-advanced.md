@@ -117,7 +117,7 @@ care to never repeat a nonce with the same key.
 Sealed boxes are designed to anonymously send messages to a recipient given its
 public key.
 
-Only the recipient can decrypt these messages, using its private key. While the
+Only the recipient can decrypt these messages, using their private key. While the
 recipient can verify the integrity of the message, it cannot verify the identity
 of the sender.
 
