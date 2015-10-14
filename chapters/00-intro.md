@@ -145,6 +145,37 @@ You might be able to achieve this result by running `php5enmod libsodium`,
 depending on which webserver you use. Make sure you restart your webserver after
 installing PECL libsodium.
 
+### Verifying your Libsodium Version
+
+After installing both the library and the PHP extension, make a quick test script to verify that you have the correct version of libsodium installed.
+
+    <?php
+    var_dump([
+        \Sodium\library_version_major(),
+        \Sodium\library_version_minor()
+    ]);
+
+If you're using libsodium 1.0.3, you should see this when you run this test script:
+
+    user@hostname:~/dir$ php version_check.php
+    array(2) {
+      [0] =>
+      int(7)
+      [1] =>
+      int(5)
+    }
+
+If you get different numbers, you won't have access to some of the features that should be in libsodium 1.0.3. If you need them, you'll need to go through the ritual of compiling from source instead:
+
+    git clone https://github.com/jedisct1/libsodium.git
+    cd libsodium
+    git checkout tag/1.0.3
+    ./autogen.sh
+    ./configure && make distcheck
+    sudo make install
+
+Then run `pecl uninstall libsodium` and `pecl install libsodium`. When you run the version check PHP script again, you should see the correct numbers.
+
 ### Extra Information
 
 * [Installing PECL Packages on Ubuntu](http://askubuntu.com/a/403348/260704)
