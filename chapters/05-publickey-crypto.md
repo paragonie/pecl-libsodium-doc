@@ -103,8 +103,7 @@ of a [key-derivation function](07-password-hashing.md#crypto-pwhash-scryptsalsa2
 you can use `crypto_box_seed_keypair`.
 
     $bob_seed = \Sodium\randombytes_buf(\Sodium\CRYPTO_BOX_SEEDBYTES);
-    $bob_sign_kp = \Sodium\crypto_box_seed_keypair($bob_seed);
-
+    $bob_encrypt_kp = \Sodium\crypto_box_seed_keypair($bob_seed);
 
 <h3 id="crypto-sign">Public-key Signatures</h3>
 
