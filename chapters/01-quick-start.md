@@ -21,8 +21,13 @@ straightforward, provided you keep these guidelines in mind:
 This is a comprehensive list of all the functions available in the libsodium PHP
 extension.
 
+* [\Sodium\bin2hex()](03-utilities-helpers.md#bin2hex)
+* [\Sodium\compare()](03-utilities-helpers.md#compare)
 * [\Sodium\crypto_aead_chacha20poly1305_decrypt()](08-advanced.md#crypto-aead-chacha20poly1305)
 * [\Sodium\crypto_aead_chacha20poly1305_encrypt()](08-advanced.md#crypto-aead-chacha20poly1305)
+* [\Sodium\crypto_aead_aes256gcm_decrypt()](08-advanced.md#crypto-aead-aes256gcm)
+* [\Sodium\crypto_aead_aes256gcm_encrypt()](08-advanced.md#crypto-aead-aes256gcm)
+* [\Sodium\crypto_aead_aes256gcm_is_available()](08-advanced.md#crypto-aead-aes256gcm)
 * [\Sodium\crypto_auth()](04-secretkey-crypto.md#crypto-auth)
 * [\Sodium\crypto_auth_verify()](04-secretkey-crypto.md#crypto-auth)
 * [\Sodium\crypto_box()](05-publickey-crypto.md#crypto-box)
@@ -33,6 +38,7 @@ extension.
 * [\Sodium\crypto_box_publickey_from_secretkey()](08-advanced.md#public-key-from-secret-key)
 * [\Sodium\crypto_box_seal()](08-advanced.md#crypto-box-seal)
 * [\Sodium\crypto_box_seal_open()](08-advanced.md#crypto-box-seal)
+* [\Sodium\crypto_box_seed_keypair](05-publickey-crypto.md#crypto-box-seed-keypair)
 * [\Sodium\crypto_box_secretkey()](05-publickey-crypto.md)
 * [\Sodium\crypto_kx()](08-advanced.md#crypto-kx)
 * [\Sodium\crypto_generichash()](06-hashing.md#crypto-generichash)
@@ -49,6 +55,8 @@ extension.
 * [\Sodium\crypto_shorthash()](06-hashing.md#crypto-shorthash)
 * [\Sodium\crypto_sign()](05-publickey-crypto.md#crypto-sign)
 * [\Sodium\crypto_sign_detached()](05-publickey-crypto.md#crypto-sign-detached)
+* [\Sodium\crypto_sign_ed25519_sk_to_curve25519()](08-advanced-crypto.md#ed25519-key-to-curve25519-key)
+* [\Sodium\crypto_sign_ed25519_pk_to_curve25519()](08-advanced-crypto.md#ed25519-key-to-curve25519-key)
 * [\Sodium\crypto_sign_keypair()](05-publickey-crypto.md)
 * [\Sodium\crypto_sign_keypair_from_secretkey_and_publickey()](05-publickey-crypto.md)
 * [\Sodium\crypto_sign_open()](05-publickey-crypto.md#crypto-sign-open)
@@ -61,14 +69,13 @@ extension.
 * [\Sodium\randombytes_buf()](02-random-data.md#randombytes-buf)
 * [\Sodium\randombytes_random16()](02-random-data.md#randombytes-random16)
 * [\Sodium\randombytes_uniform()](02-random-data.md#randombytes-uniform)
-* [\Sodium\bin2hex()](03-utilities-helpers.md#bin2hex)
 * [\Sodium\hex2bin()](03-utilities-helpers.md#hex2bin)
 * [\Sodium\increment()](03-utilities-helpers.md#increment)
-* \Sodium\library_version_major()
-* \Sodium\library_version_minor()
+* [\Sodium\library_version_major()](03-utilities-helpers.md#version)
+* [\Sodium\library_version_minor()](03-utilities-helpers.md#version)
 * [\Sodium\memcmp()](03-utilities-helpers.md#memcmp)
 * [\Sodium\memzero()](03-utilities-helpers.md#memzero)
-* \Sodium\version_string()
+* [\Sodium\version_string()](03-utilities-helpers.md#version)
 
 <h3 id="constant-index">Libsodium Constants</h3>
 
@@ -102,6 +109,38 @@ extension.
             </td>
             <td class="const_value">
                 8
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_ABYTES</code>
+            </td>
+            <td class="const_value">
+                16
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_AES256GCM_KEYBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_AES256GCM_NSECBYTES</code>
+            </td>
+            <td class="const_value">
+                0
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_AES256GCM_NPUBBYTES</code>
+            </td>
+            <td class="const_value">
+                12
             </td>
         </tr>
         <tr>
@@ -174,6 +213,14 @@ extension.
             </td>
             <td class="const_value">
                 24
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_BOX_SEEDBYTES</code>
+            </td>
+            <td class="const_value">
+                32
             </td>
         </tr>
         <tr>

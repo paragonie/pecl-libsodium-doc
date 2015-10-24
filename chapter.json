@@ -94,7 +94,15 @@
             },
             {
                 "title": "Constant-Time Memory Comparison",
+                "anchor": "compare"
+            },
+            {
+                "title": "Constant-Time String Comparison",
                 "anchor": "memcmp"
+            },
+            {
+                "title": "Libsodium Version Checks",
+                "anchor": "version"
             }
         ],
         "tags": [
@@ -204,6 +212,10 @@
                 "anchor": "crypto-aead-chacha20poly1305"
             },
             {
+                "title": "Authenticated (secret-key) Encryption with Associated Data - AES-256 + GCM",
+                "anchor": "crypto-aead-aes256gcm"
+            },
+            {
                 "title": "Secret-key Encryption (Unauthenticated)",
                 "anchor": "crypto-stream"
             },
@@ -214,6 +226,10 @@
             {
                 "title": "Scalar multiplication (Elliptic Curve Cryptography)",
                 "anchor": "crypto-scalarmult"
+            },
+            {
+                "title": "Transform crypto_sign key into crypto_box key",
+                "anchor": "ed25519-key-to-curve25519-key"
             },
             {
                 "title": "Get Public-key from Secret-key",

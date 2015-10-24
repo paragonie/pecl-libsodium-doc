@@ -94,6 +94,18 @@ binary string that should only be used once).
         throw new Exception("Malformed message or invalid MAC");
     }
 
+<h3 id="crypto-box-seed-keypair">Generating a <code>crypto_box</code> Key-pair from a Seed</h3>
+
+> `string \Sodium\crypto_box_seed_keypair(string $seed);`
+
+To deterministically generate a keypair from a random string (or from the output
+of a [key-derivation function](07-password-hashing.md#crypto-pwhash-scryptsalsa208sha256)),
+you can use `crypto_box_seed_keypair`.
+
+    $bob_seed = \Sodium\randombytes_buf(\Sodium\CRYPTO_BOX_SEEDBYTES);
+    $bob_sign_kp = \Sodium\crypto_box_seed_keypair($bob_seed);
+
+
 <h3 id="crypto-sign">Public-key Signatures</h3>
 
 Public-key signatures are incredibly useful. If you can verify that you have the
