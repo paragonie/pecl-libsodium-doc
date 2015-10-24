@@ -89,38 +89,6 @@ extension.
     <tbody>
         <tr>
             <td class="const_key">
-                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_KEYBYTES</code>
-            </td>
-            <td class="const_value">
-                32
-            </td>
-        </tr>
-        <tr>
-            <td class="const_key">
-                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_NSECBYTES</code>
-            </td>
-            <td class="const_value">
-                0
-            </td>
-        </tr>
-        <tr>
-            <td class="const_key">
-                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_NPUBBYTES</code>
-            </td>
-            <td class="const_value">
-                8
-            </td>
-        </tr>
-        <tr>
-            <td class="const_key">
-                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_ABYTES</code>
-            </td>
-            <td class="const_value">
-                16
-            </td>
-        </tr>
-        <tr>
-            <td class="const_key">
                 <code class="php">\Sodium\CRYPTO_AEAD_AES256GCM_KEYBYTES</code>
             </td>
             <td class="const_value">
@@ -141,6 +109,38 @@ extension.
             </td>
             <td class="const_value">
                 12
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_AES256GCM_ABYTES</code>
+            </td>
+            <td class="const_value">
+                16
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_KEYBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_NSECBYTES</code>
+            </td>
+            <td class="const_value">
+                0
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_NPUBBYTES</code>
+            </td>
+            <td class="const_value">
+                8
             </td>
         </tr>
         <tr>
