@@ -173,7 +173,7 @@ ritual of compiling from source instead:
 
     git clone https://github.com/jedisct1/libsodium.git
     cd libsodium
-    git checkout tag/1.0.3
+    git checkout tag/1.0.4
     ./autogen.sh
     ./configure && make distcheck
     sudo make install
