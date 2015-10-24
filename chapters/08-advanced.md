@@ -230,6 +230,16 @@ The `crypto_scalarmult` API allows deriving a shared secret from your secret key
 and the other user's public key. It also allows the derivation of your public
 key from your secret key.
 
+<h4 id="ed25519-key-to-curve25519-key">Transform crypto_sign key into crypto_box key</h4>
+
+> `string \Sodium\crypto_sign_ed25519_sk_to_curve25519(string $ed25519sk)`
+
+Pass a `crypto_sign` secret key, get a `crypto_box` secret key.
+
+> `string \Sodium\crypto_sign_ed25519_pk_to_curve25519(string $ed25519pk)`
+
+Pass a `crypto_sign` public key, get a `crypto_box` public key.
+
 <h4 id="public-key-from-secret-key">Get Public-key from Secret-key</h3>
 
 > `string \Sodium\crypto_box_publickey_from_secretkey(string $secretkey)`
