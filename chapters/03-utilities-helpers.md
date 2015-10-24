@@ -38,6 +38,9 @@ attacks while PHP's built-in function is not.
 When you are done handling sensitive information, use `\Sodium\memzero()` to erase
 the contents of a variable.
 
+> **Warning**: If you're running PHP 7, make sure you're using version 1.0.1 of
+> the PHP extension before using this function.
+
     $ciphertext = \Sodium\crypto_secretbox($message, $nonce, $key);
     \Sodium\memzero($message);
     \Sodium\memzero($key);
@@ -49,12 +52,31 @@ the contents of a variable.
 If you need to increment a value (e.g. given a randomly generated nonce, obtain
 the next nonce), use `\Sodium\increment()`.
 
+> **Warning**: If you're running PHP 7, make sure you're using version 1.0.1 of
+> the PHP extension before using this function.
+
     $x = \Sodium\randombytes_buf(\Sodium\CRYPTO_SECRETBOX_NONCEBYTES);
     
     // After an encryption
     \Sodium\increment($x);
 
-<h3 id="memcmp">Constant-Time Memory Comparison</h3>
+<h3 id="compare">Constant-Time String Comparison</h3>
+
+> `int \Sodium\compare(string $str1, string $str2)`
+
+Timing-safe variant of PHP's native [`strcmp()`](https://secure.php.net/strcmp).
+
+Returns -1 if `$str1` is less than `$str2`; 1 if `$str1` is greater than `$str2`,
+and 0 if they are equal. This is mostly useful for comparing nonces to prevent
+replay attacks.
+
+Example:
+
+    if (\Sodium\compare($message['nonce'], $expected_nonce) === 0) {
+        // Proceed with crypto_box decryption
+    }
+
+<h3 id="memcmp">Constant-Time Memory Equality Comparison</h3>
 
 > `int \Sodium\memcmp(string $a, string $b)`
 
@@ -68,6 +90,32 @@ Example:
     if (\Sodium\memcmp($mac, $given_mac) !== 0) {
         // Failure
     }
+
+<h3 id="version">Libsodium Version Checks</h3>
+
+> `int \Sodium\library_version_major()`
+
+Returns the major version of the current version of the sodium library 
+installed.
+
+    var_dump(\Sodium\library_version_major());
+    # int(7)
+
+> `int \Sodium\library_version_minor()`
+
+Returns the minor version of the current version of the sodium library 
+installed.
+
+    var_dump(\Sodium\library_version_minor());
+    # int(6)
+
+> `string \Sodium\version_string()`
+
+Returns a string identifier of the current version of the sodium library 
+installed. (This is irrelevant to the version of the PHP extension!)
+
+    var_dump(\Sodium\version_string());
+    # string(5) "1.0.4"
 
 ### Extra Information
 

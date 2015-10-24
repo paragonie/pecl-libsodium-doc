@@ -73,6 +73,71 @@ Like `crypto_secretbox`, you should never reuse the same nonce and key.
         throw new Exception("Bad ciphertext");
     }
 
+<h3 id="crypto-aead-aes256gcm">Authenticated (secret-key) Encryption with Associated Data - AES-256 + GCM</h3>
+
+When supported by the CPU, AES-256-GCM is the fastest AEAD cipher available in
+this library. **When unsupported by CPU, the encrypt/decrypt functions are not
+available.**
+
+> `bool \Sodium\crypto_aead_aes256gcm_is_available()`
+
+Make sure you check that AES-256-GCM is available before you attempt to use it.
+
+#### From the Libsodium documentation:
+
+This operation:
+
+* Encrypts a message with a key and a nonce to keep it confidential.
+* Computes an authentication tag. This tag is used to make sure that the
+  message, as well as optional, non-confidential (non-encrypted) data, haven't 
+  been tampered with.
+
+A typical use case for additional data is to store protocol-specific metadata 
+about the message, such as its length and encoding.
+
+The chosen construction uses encrypt-then-MAC and decryption will never be 
+performed, even partially, before verification.
+
+----
+
+Since this is a secret-key cryptography function, you can generate an encryption
+key like so:
+
+    $key = \Sodium\randombytes_buf(\Sodium\CRYPTO_AEAD_AES256GCM_KEYBYTES);
+
+#### AEAD Encryption
+
+> `string \Sodium\crypto_aead_aes256gcm_encrypt(string $confidential_message, string $public_message, string $nonce, string $key)`
+
+Like `crypto_secretbox`, you should never reuse the same nonce and key.
+
+    if (\Sodium\crypto_aead_aes256gcm_is_available()) {
+        $nonce = \Sodium\randombytes_buf(\Sodium\CRYPTO_AEAD_AES256GCM_NPUBBYTES);
+        $ad = 'Additional (public) data';
+        $ciphertext = \Sodium\crypto_aead_aes256gcm_encrypt(
+            $message,
+            $ad,
+            $nonce,
+            $key
+        );
+    }
+
+#### AEAD Decryption
+
+> `string|bool \Sodium\crypto_aead_aes256gcm_decrypt(string $confidential_message, string $public_message, string $nonce, string $key)`
+
+    if (\Sodium\crypto_aead_aes256gcm_is_available()) {
+        $decrypted = \Sodium\crypto_aead_aes256gcm_decrypt(
+            $ciphertext,
+            $ad,
+            $nonce,
+            $key
+        );
+        if ($decrypted === false) {
+            throw new Exception("Bad ciphertext");
+        }
+    }
+
 <h3 id="crypto-stream">Secret-key Encryption (Unauthenticated)</h3>
 
 Before using these functions, you should make sure you understand 
@@ -165,7 +230,17 @@ The `crypto_scalarmult` API allows deriving a shared secret from your secret key
 and the other user's public key. It also allows the derivation of your public
 key from your secret key.
 
-<h4 id="public-key-from-secret-key">Get Public-key from Secret-key</h3>
+<h4 id="ed25519-key-to-curve25519-key">Transform crypto_sign key into crypto_box key</h4>
+
+> `string \Sodium\crypto_sign_ed25519_sk_to_curve25519(string $ed25519sk)`
+
+Pass a `crypto_sign` secret key, get a `crypto_box` secret key.
+
+> `string \Sodium\crypto_sign_ed25519_pk_to_curve25519(string $ed25519pk)`
+
+Pass a `crypto_sign` public key, get a `crypto_box` public key.
+
+<h4 id="public-key-from-secret-key">Get Public-key from Secret-key</h4>
 
 > `string \Sodium\crypto_box_publickey_from_secretkey(string $secretkey)`
 
