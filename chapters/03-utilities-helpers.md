@@ -67,14 +67,14 @@ the next nonce), use `\Sodium\increment()`.
 Timing-safe variant of PHP's native [`strcmp()`](https://secure.php.net/strcmp).
 
 Returns -1 if `$str1` is less than `$str2`; 1 if `$str1` is greater than `$str2`,
-and 0 if they are equal. 
+and 0 if they are equal. This is mostly useful for comparing nonces to prevent
+replay attacks.
 
 Example:
 
-    // Sort an array based on a sensitive record:
-    uasort($array, function($a, $b) {
-        return \Sodium\compare($a['sensitive'], $b['sensitive']);
-    });
+    if (\Sodium\compare($message['nonce'], $expected_nonce) === 0) {
+        // Proceed with crypto_box decryption
+    }
 
 <h3 id="memcmp">Constant-Time Memory Equality Comparison</h3>
 
