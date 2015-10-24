@@ -240,7 +240,7 @@ Pass a `crypto_sign` secret key, get a `crypto_box` secret key.
 
 Pass a `crypto_sign` public key, get a `crypto_box` public key.
 
-<h4 id="public-key-from-secret-key">Get Public-key from Secret-key</h3>
+<h4 id="public-key-from-secret-key">Get Public-key from Secret-key</h4>
 
 > `string \Sodium\crypto_box_publickey_from_secretkey(string $secretkey)`
 
