@@ -128,8 +128,9 @@ and then follow these three steps.
   * Extract anywhere, run `regsvr32 [path-to-libsodium-dll]`
   * Copy the DLL to `%SYSTEM32%`
   * Copy the DLL to the same directory as `php.exe`
-2. For `php_libsodium.dll`, copy it to the extension directory (usually `ext/` from
-   the directory that contains `php.exe`).
+2. For `php_libsodium.dll`, copy it to the extension directory (usually but not
+   always `ext/` from the directory that contains `php.exe` -- the `extension_dir`
+   configuration directive in `php.ini` will point you in the right place).
 3. Add `extension=php_libsodium.dll` to your `php.ini` file.
 
 ---------------------------
