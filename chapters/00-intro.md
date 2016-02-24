@@ -115,9 +115,11 @@ On Fedora, libsodium can be installed with:
 
     dnf install libsodium-devel
 
-On RHEL, CentOS,  libsodium can be installed from EPEL repository with:
+On RHEL and CentOS, libsodium can be installed from EPEL repository with:
 
     yum install libsodium-devel
+
+<h5 id="install-windows">Installing Libsodium and the PHP Extension on Windows</h5>
 
 On Windows, download [the appropriate zip file for your version of PHP](http://windows.php.net/downloads/pecl/releases/libsodium/1.0.2/)
 and then follow these three steps.
