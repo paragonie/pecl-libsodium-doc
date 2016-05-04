@@ -73,6 +73,35 @@ Like `crypto_secretbox`, you should never reuse the same nonce and key.
         throw new Exception("Bad ciphertext");
     }
 
+<h3 id="crypto-aead-chacha20poly1305-ietf">Authenticated (secret-key) Encryption with Associated Data - ChaCha20 + Poly1305 (IETF Variant)</h3>
+
+The IETF variant of ChaCha20-Poly1305 uses a 96-bit nonce (12 bytes) instead
+of a 64-bit nonce (8 bytes).
+
+#### AEAD Encryption
+
+    $nonce = \Sodium\randombytes_buf(\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_IETF_NPUBBYTES);
+    $ad = 'Additional (public) data';
+    $ciphertext = \Sodium\crypto_aead_chacha20poly1305_ietf_encrypt(
+        $message,
+        $ad,
+        $nonce,
+        $key
+    );
+
+#### AEAD Decryption
+
+> `string|bool \Sodium\crypto_aead_chacha20poly1305_decrypt(string $confidential_message, string $public_message, string $nonce, string $key)`
+
+    $decrypted = \Sodium\crypto_aead_chacha20poly1305_ietf_decrypt(
+        $ciphertext,
+        $ad,
+        $nonce,
+        $key
+    );
+    if ($decrypted === false) {
+        throw new Exception("Bad ciphertext");
+    }
 
 <h3 id="crypto-aead-aes256gcm">Authenticated (secret-key) Encryption with Associated Data - AES-256 + GCM</h3>
 

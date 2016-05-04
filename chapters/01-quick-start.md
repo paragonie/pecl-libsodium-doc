@@ -332,7 +332,7 @@ extension.
                 64
             </td>
         </tr>
-        <tr>
+        <tr id="const-crypto-pwhash">
             <td class="const_key">
                 <code class="php">\Sodium\CRYPTO_PWHASH_SALTBYTES</code>
             </td>
@@ -396,7 +396,7 @@ extension.
                 536870912
             </td>
         </tr>
-        <tr>
+        <tr id="const-crypto-pwhash-scrypt">
             <td class="const_key">
                 <code class="php">\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_SALTBYTES</code>
             </td>

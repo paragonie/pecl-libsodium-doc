@@ -23,19 +23,70 @@ Common use cases:
 * Password storage, or rather: storing what it takes to verify a password
   without having to store the actual password.
 
-<h3 id="crypto-pwhash">(This Space Reserved for Argon2 Finalization)</h3>
+<h3 id="crypto-pwhash-str">Argon2i Password Hashing and Verification</h3>
 
-A high-level `crypto_pwhash_*()` API is intentionally not defined in Libsodium
-yet, but will eventually use the BLAKE2b-based Argon2i function in its final
-version.
+> `string \Sodium\crypto_pwhash_str(string $password, int $opslimit, int $memlimit)`
+
+This uses the Argon2i key derivation function to generate a storable password
+hash. It's highly recommended that you use [the provided constants](01-quick-start.md#const-crypto-pwhash)
+for `$opslimit` and `$memlimit`.
+
+    // hash the password and return an ASCII string suitable for storage
+    $hash_str = \Sodium\crypto_pwhash_str(
+        $password,
+        \Sodium\CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE,
+        \Sodium\CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE
+    );
+
+-----
+
+> `bool \Sodium\crypto_pwhash_str_verify(string $hash_str, string $password)`
+
+Returns `TRUE` if the password matches the given hash.
+
+    if (\Sodium\crypto_pwhash_str_verify($hash_str, $password)) {
+        // recommended: wipe the plaintext password from memory
+        \Sodium\memzero($password);
+        
+        // Password was valid
+    } else {
+        // recommended: wipe the plaintext password from memory
+        \Sodium\memzero($password);
+        
+        // Password was invalid.
+    }
+
+<h3 id="crypto-pwhash">Argon2i Key Derivation</h3>
+
+> `string \Sodium\crypto_pwhash(int $output_length, string $password, string $salt, int $opslimit, int $memlimit)`
+
+If you need to derive an encryption key (e.g. for [`crypto_sign_seed_keypair()`](05-publickey-crypto.md#crypto-sign-seed-keypair))
+from a user-provided password, you can invoke this function directly.
+
+For each key, you must use a unique and unpredictable salt (which should be stored
+for re-use).
+
+    // create a random salt
+    $salt = \Sodium\randombytes_buf(\Sodium\CRYPTO_PWHASH_SALTBYTES);
+
+And then you can derive your cryptographic key from your password like so:
+
+    $out_len = \Sodium\CRYPTO_SIGN_SEEDBYTES;
+    $seed = \Sodium\crypto_pwhash(
+        $out_len,
+        $password,
+        $salt,
+        \Sodium\CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE,
+        \Sodium\CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE
+    );
 
 <h3 id="crypto-pwhash-scryptsalsa208sha256-str">Scrypt Password Hashing and Verification</h3>
 
 > `string \Sodium\crypto_pwhash_scryptsalsa208sha256_str(string $password, int $opslimit, int $memlimit)`
 
 This uses the scrypt key derivation function to generate a storable password
-hash. It's highly recommended that you use the provided constants for `$opslimit`
-and `$memlimit`.
+hash. It's highly recommended that you use [the provided constants](01-quick-start.md#const-crypto-pwhash-scrypt)
+for `$opslimit` and `$memlimit`.
 
 
     // hash the password and return an ASCII string suitable for storage
@@ -53,12 +104,12 @@ Returns `TRUE` if the password matches the given hash.
 
     if (\Sodium\crypto_pwhash_scryptsalsa208sha256_str_verify($hash_str, $password)) {
         // recommended: wipe the plaintext password from memory
-        \Sodium\memzero($passwd);
+        \Sodium\memzero($password);
         
         // Password was valid
     } else {
         // recommended: wipe the plaintext password from memory
-        \Sodium\memzero($passwd);
+        \Sodium\memzero($password);
         
         // Password was invalid.
     }
@@ -67,17 +118,10 @@ Returns `TRUE` if the password matches the given hash.
 
 > `string \Sodium\crypto_pwhash_scryptsalsa208sha256(int $output_length, string $password, string $salt, int $opslimit, int $memlimit)`
 
-If you need to derive an encryption key (e.g. for [`crypto_sign_seed_keypair()`](05-publickey-crypto.md#crypto-sign-seed-keypair))
-from a user-provided password, you can invoke this function directly.
-
-For each key, you must use a unique and unpredictable salt (which should be stored
-for re-use).
+As with Argon2i above:
 
     // create a random salt
     $salt = \Sodium\randombytes_buf(\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_SALTBYTES);
-
-And then you can derive your cryptographic key from your password like so:
-
     $out_len = \Sodium\CRYPTO_SIGN_SEEDBYTES;
     $seed = \Sodium\crypto_pwhash_scryptsalsa208sha256(
         $out_len,
