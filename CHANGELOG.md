@@ -1,5 +1,19 @@
 # Changelog
 
+### 1.0.2 - 2016-05-04
+
+* Update for libsodium-php 1.0.6
+* Added `\Sodium\crypto_pwhash*`
+
+### 1.0.1 - 2015-09-08 - New Recipe, Typo Fixes
+
+* Added an encrypted hash recipe
+* Jacob Dreesen (@jdreesen) fixed several typos
+
+### 1.0.0 - 2015-09-04 - First Edition
+
+First edition. API coverage is complete at this state.
+
 ### 0.0.2 - 2015-08-29 - Rough Drafts
 
 We've published rough drafts for Chapters 1, 3, 4, and 5.

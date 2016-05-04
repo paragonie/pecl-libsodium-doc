@@ -73,6 +73,7 @@ Like `crypto_secretbox`, you should never reuse the same nonce and key.
         throw new Exception("Bad ciphertext");
     }
 
+
 <h3 id="crypto-aead-aes256gcm">Authenticated (secret-key) Encryption with Associated Data - AES-256 + GCM</h3>
 
 When supported by the CPU, AES-256-GCM is the fastest AEAD cipher available in

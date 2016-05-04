@@ -25,6 +25,8 @@ extension.
 * [\Sodium\compare()](03-utilities-helpers.md#compare)
 * [\Sodium\crypto_aead_chacha20poly1305_decrypt()](08-advanced.md#crypto-aead-chacha20poly1305)
 * [\Sodium\crypto_aead_chacha20poly1305_encrypt()](08-advanced.md#crypto-aead-chacha20poly1305)
+* [\Sodium\crypto_aead_chacha20poly1305_ietf_decrypt()](08-advanced.md#crypto-aead-chacha20poly1305-ietf)
+* [\Sodium\crypto_aead_chacha20poly1305_ietf_encrypt()](08-advanced.md#crypto-aead-chacha20poly1305-ietf)
 * [\Sodium\crypto_aead_aes256gcm_decrypt()](08-advanced.md#crypto-aead-aes256gcm)
 * [\Sodium\crypto_aead_aes256gcm_encrypt()](08-advanced.md#crypto-aead-aes256gcm)
 * [\Sodium\crypto_aead_aes256gcm_is_available()](08-advanced.md#crypto-aead-aes256gcm)
@@ -45,6 +47,9 @@ extension.
 * [\Sodium\crypto_generichash_init()](06-hashing.md#crypto-generichash)
 * [\Sodium\crypto_generichash_update()](06-hashing.md#crypto-generichash)
 * [\Sodium\crypto_generichash_final()](06-hashing.md#crypto-generichash)
+* [\Sodium\crypto_pwhash()](07-password-hashing.md#crypto-pwhash)
+* [\Sodium\crypto_pwhash_str()](07-password-hashing.md#crypto-pwhash-str)
+* [\Sodium\crypto_pwhash_str_verify()](07-password-hashing.md#crypto-pwhash-str)
 * [\Sodium\crypto_pwhash_scryptsalsa208sha256()](07-password-hashing.md#crypto-pwhash-scryptsalsa208sha256)
 * [\Sodium\crypto_pwhash_scryptsalsa208sha256_str()](07-password-hashing.md#crypto-pwhash-scryptsalsa208sha256-str)
 * [\Sodium\crypto_pwhash_scryptsalsa208sha256_str_verify()](07-password-hashing.md#crypto-pwhash-scryptsalsa208sha256-str)
@@ -146,6 +151,38 @@ extension.
         <tr>
             <td class="const_key">
                 <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_ABYTES</code>
+            </td>
+            <td class="const_value">
+                16
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_IETF_KEYBYTES</code>
+            </td>
+            <td class="const_value">
+                32
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_IETF_NSECBYTES</code>
+            </td>
+            <td class="const_value">
+                0
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_IETF_NPUBBYTES</code>
+            </td>
+            <td class="const_value">
+                12
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_AEAD_CHACHA20POLY1305_IETF_ABYTES</code>
             </td>
             <td class="const_value">
                 16
@@ -293,6 +330,70 @@ extension.
             </td>
             <td class="const_value">
                 64
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_PWHASH_SALTBYTES</code>
+            </td>
+            <td class="const_value">
+                16
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_PWHASH_STRPREFIX</code>
+            </td>
+            <td class="const_value">
+                $argon2i$
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE</code>
+            </td>
+            <td class="const_value">
+                4
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE</code>
+            </td>
+            <td class="const_value">
+                33554432
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_PWHASH_OPSLIMIT_MODERATE</code>
+            </td>
+            <td class="const_value">
+                6
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_PWHASH_MEMLIMIT_MODERATE</code>
+            </td>
+            <td class="const_value">
+                134217728
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_PWHASH_OPSLIMIT_SENSITIVE</code>
+            </td>
+            <td class="const_value">
+                8
+            </td>
+        </tr>
+        <tr>
+            <td class="const_key">
+                <code class="php">\Sodium\CRYPTO_PWHASH_MEMLIMIT_SENSITIVE</code>
+            </td>
+            <td class="const_value">
+                536870912
             </td>
         </tr>
         <tr>

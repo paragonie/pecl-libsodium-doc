@@ -31,8 +31,8 @@ The design choices emphasize security, and "magic constants" have clear rational
 And despite the emphasis on high security, primitives are faster across-the-board
 than most implementations of the NIST standards.
 
-[Version 1.0.8](https://github.com/jedisct1/libsodium/releases) was released on 
-December 25, 2015.
+[Version 1.0.10](https://github.com/jedisct1/libsodium/releases) was released on 
+April 4, 2016.
 
 #### What is PECL Libsodium?
 
@@ -164,10 +164,11 @@ After installing both the library and the PHP extension, make a quick test scrip
     <?php
     var_dump([
         \Sodium\library_version_major(),
-        \Sodium\library_version_minor()
+        \Sodium\library_version_minor(),
+        \Sodium\version_string()
     ]);
 
-If you're using libsodium 1.0.8, you should see this when you run this test 
+If you're using libsodium 1.0.10, you should see this when you run this test 
 script:
 
     user@hostname:~/dir$ php version_check.php
@@ -175,17 +176,19 @@ script:
       [0] =>
       int(9)
       [1] =>
-      int(1)
+      int(2),
+      [2] =>
+      string(6) "1.0.10"
     }
 
 If you get different numbers, you won't have access to some of the features that
-should be in libsodium 1.0.8. If you need them, you'll need to go through the
+should be in libsodium 1.0.10. If you need them, you'll need to go through the
 ritual of compiling from source instead:
 
     sudo apt-get purge libsodium1.* # get rid of distro packages
     git clone https://github.com/jedisct1/libsodium.git
     cd libsodium
-    git checkout tags/1.0.8
+    git checkout tags/1.0.10
     ./autogen.sh
     ./configure && make distcheck
     sudo make install
