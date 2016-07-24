@@ -130,7 +130,7 @@ and then follow these three steps.
    * The `extension_dir` configuration directive in `php.ini` will point you in the right place
 3. Add `extension=php_libsodium.dll` to your `php.ini` file.
 
-#### Installing Libsodium (from source)
+<h4 id="installing-libsodium-source">Installing Libsodium (from source)</h4>
 
 If you're wanting the latest release of libsodium and it hasn't yet made its
 way into your operating system's package management repositories, the best
