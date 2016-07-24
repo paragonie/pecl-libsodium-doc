@@ -146,7 +146,7 @@ install libsodium from source.
 
 Debian-based distributions can install the necessary utilities with:
 
-    apt-get install autoconf build-essential libtool
+    apt-get install build-essential
 
 RHEL-based distributions can install the necessary utilities with:
 
@@ -155,12 +155,9 @@ RHEL-based distributions can install the necessary utilities with:
 After installing the necessary utilities, libsodium can be compiled as such:
 
     # Clone the libsodium source tree
-    git clone https://github.com/jedisct1/libsodium.git; cd libsodium
-    # Switch to the latest release of libsodium
-    git checkout "$(git for-each-ref --sort=taggerdate \
-      --format='tags/%(tag)' | tail -1)"
+    git clone -b stable https://github.com/jedisct1/libsodium.git
     # Build libsodium, perform any defined tests, install libsodium
-    ./autogen.sh && ./configure && make check && make install
+    cd libsodium && ./configure && make check && make install
 
 ---------------------------
 
@@ -212,15 +209,7 @@ script:
 
 If you get different numbers, you won't have access to some of the features that
 should be in libsodium 1.0.10. If you need them, you'll need to go through the
-ritual of compiling from source instead:
-
-    sudo apt-get purge libsodium1.* # get rid of distro packages
-    git clone https://github.com/jedisct1/libsodium.git
-    cd libsodium
-    git checkout tags/1.0.10
-    ./autogen.sh
-    ./configure && make distcheck
-    sudo make install
+ritual of compiling from source instead (shown above).
 
 Then run `pecl uninstall libsodium` and `pecl install libsodium`. When you run
 the version check PHP script again, you should see the correct numbers.
