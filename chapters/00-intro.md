@@ -85,7 +85,7 @@ and and understood [basic cryptography concepts](https://paragonie.com/blog/2015
 
 <h3 id="installing-libsodium">Installing Libsodium and the PHP extension</h3>
 
-#### Installing Libsodium
+#### Installing Libsodium (precompiled)
 
 On Debian >= 8 and Ubuntu >= 15.04, libsodium can be installed with:
 
@@ -130,10 +130,39 @@ and then follow these three steps.
    * The `extension_dir` configuration directive in `php.ini` will point you in the right place
 3. Add `extension=php_libsodium.dll` to your `php.ini` file.
 
----------------------------
+#### Installing Libsodium (from source)
 
-If your operating system (or OS version) isn't listed above, you may have to go
-through the trouble of [manually installing libsodium](https://download.libsodium.org/doc/installation/index.html).
+If you're wanting the latest release of libsodium and it hasn't yet made its
+way into your operating system's package management repositories, the best
+option is to compile it from source.
+
+Installing libsodium from source on OS X is easy; simply provide the
+`--build-from-source` flag when installing with brew:
+
+    brew install --build-from-source libsodium
+
+For other operating systems, some prerequisites are necessary to build and
+install libsodium from source.
+
+Debian-based distributions can install the necessary utilities with:
+
+    apt-get install autoconf build-essential libtool
+
+RHEL-based distributions can install the necessary utilities with:
+
+    yum groupinstall "Development Tools"
+
+After installing the necessary utilities, libsodium can be compiled as such:
+
+    # Clone the libsodium source tree
+    git clone https://github.com/jedisct1/libsodium.git; cd libsodium
+    # Switch to the latest release of libsodium
+    git checkout "$(git for-each-ref --sort=taggerdate \
+      --format='tags/%(tag)' | tail -1)"
+    # Build libsodium, perform any defined tests, install libsodium
+    ./autogen.sh && ./configure && make check && make install
+
+---------------------------
 
 #### Installing the PHP Extension via PECL
 
