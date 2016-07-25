@@ -161,7 +161,7 @@ After installing the necessary utilities, libsodium can be compiled as such:
 
 ---------------------------
 
-#### Installing the PHP Extension via PECL
+<h4 id="installing-extension">Installing the PHP Extension via PECL</h4>
 
 If you don't have the PECL package manager installed on your system, make sure
 you do that first. There are guides for installing PECL available on the 
