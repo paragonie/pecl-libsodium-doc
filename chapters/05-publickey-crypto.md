@@ -166,9 +166,10 @@ Instead of returning a signed message, this function only returns the signature.
 
     // On Bob's computer:
     if (\Sodium\crypto_sign_verify_detached(
-        $signature,
-        $message,
-        $alice_sign_publickey
+            $signature,
+            $message,
+            $alice_sign_publickey
+        )
     ) {
         // We've verified the authenticity of message and already had its contents
         // stored in $message
