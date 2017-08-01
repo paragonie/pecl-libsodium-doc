@@ -236,7 +236,7 @@ This will encrypt a message with a user's public key.
 
 #### Sealed Box Decryption
 
-> `string \Sodium\crypto_box_seal_open(string $message, string $recipient_keypair)`
+> `string|bool \Sodium\crypto_box_seal_open(string $message, string $recipient_keypair)`
 
 Opens a sealed box with a keypair from your secret key and public key.
 
@@ -248,6 +248,9 @@ Opens a sealed box with a keypair from your secret key and public key.
         $anonymous_message_to_bob,
         $bob_box_kp
     );
+    if ($decrypted_message === false) {
+        throw new Exception("Bad ciphertext");
+    }
 
 <h3 id="crypto-scalarmult">Scalar multiplication (Elliptic Curve Cryptography)</h3>
 
