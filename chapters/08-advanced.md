@@ -264,11 +264,11 @@ key from your secret key.
 
 > `string \Sodium\crypto_sign_ed25519_sk_to_curve25519(string $ed25519sk)`
 
-Pass a `crypto_sign` secret key, get a `crypto_box` secret key.
+Pass a `crypto_sign` secret key, get the corresponding `crypto_box` secret key.
 
 > `string \Sodium\crypto_sign_ed25519_pk_to_curve25519(string $ed25519pk)`
 
-Pass a `crypto_sign` public key, get a `crypto_box` public key.
+Pass a `crypto_sign` public key, get the corresponding `crypto_box` public key.
 
 <h4 id="public-key-from-secret-key">Get Public-key from Secret-key</h4>
 
