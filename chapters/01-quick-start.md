@@ -24,6 +24,8 @@ used namespaced functions like `\Sodium\crypto_box()` instead of prefixed functi
  
 To reference the older documentation, [view the old branch on Github](https://github.com/paragonie/pecl-libsodium-doc/tree/v1).
 
+To view this page in the old API documentation, [click here](https://github.com/paragonie/pecl-libsodium-doc/blob/v1/chapters/01-quick-start.md).
+
 <h3 id="function-index">Libsodium Functions</h3>
 
 This is a comprehensive list of all the functions available in the libsodium PHP

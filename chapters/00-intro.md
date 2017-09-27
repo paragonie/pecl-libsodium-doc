@@ -9,6 +9,8 @@ the finer details for readers that are interested.
 
 Let's jump right in, shall we?
 
+To view the old API documentation, [click here](https://github.com/paragonie/pecl-libsodium-doc/blob/v1/chapters/00-intro.md).
+
 <h3 id="what-is-libsodium">What is Libsodium?</h3>
 
 (Copied from the [Official Libsodium Documentation](https://download.libsodium.org/doc/).)
@@ -218,40 +220,27 @@ Once you have libsodium installed on your system, the next thing to do is to
 install the PHP extension. The easiest way to do this is to install the PECL
 package.
 
-You can get PECL libsodium by running this command.
+You can get ext/sodium by running this command.
 
     pecl install libsodium
 
 And add the following line to your `php.ini` file:
 
-    # Version 2 of the extension:
     extension=sodium.so
-    
-    # Version 1 of the extension:
-    extension=libsodium.so
 
-You might be able to achieve this result by running `phpenmod sodium` or `php5enmod libsodium`,
+You might be able to achieve this result by running `phpenmod sodium` or `php5enmod sodium`,
 depending on which webserver you use. Make sure you restart your webserver after
-installing PECL libsodium.
+installing ext/sodium.
 
 <h3 id="verifying-versions">Verifying your Libsodium Version</h3>
 
 After installing both the library and the PHP extension, make a quick test script to verify that you have the correct version of libsodium installed.
 
     <?php
-    // Version 2:
     var_dump([
         SODIUM_LIBRARY_MAJOR_VERSION,
         SODIUM_LIBRARY_MINOR_VERSION,
         SODIUM_LIBRARY_VERSION
-    ]);
-    
-    
-    // Version 1:
-    var_dump([
-        \Sodium\library_version_major(),
-        \Sodium\library_version_minor(),
-        \Sodium\version_string()
     ]);
 
 If you're using libsodium 1.0.14, you should see this when you run this test 
