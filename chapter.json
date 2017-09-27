@@ -47,7 +47,7 @@
         ]
     },
     {
-        "title": "Random Data",
+        "title": "Random Data (Version 1 only)",
         "source": "02-random-data.md",
         "sections": [
             {
@@ -181,16 +181,12 @@
         "source": "07-password-hashing.md",
         "sections": [
             {
-                "title": "(This Space Reserved for Argon2 Finalization)",
+                "title": "Argon2 Key Derivation",
                 "anchor": "crypto-pwhash"
             },
             {
-                "title": "Scrypt Password Hashing and Verification",
-                "anchor": "crypto-pwhash-scryptsalsa208sha256-str"
-            },
-            {
-                "title": "Scrypt Key Derivation",
-                "anchor": "crypto-pwhash-scryptsalsa208sha256"
+                "title": "Argon2 Password Hashing and Verification",
+                "anchor": "crypto-pwhash-str"
             }
         ],
         "tags": [
@@ -214,6 +210,10 @@
             {
                 "title": "Authenticated (secret-key) Encryption with Associated Data - AES-256 + GCM",
                 "anchor": "crypto-aead-aes256gcm"
+            },
+            {
+                "title": "Authenticated (secret-key) Encryption with Associated Data - XChaCha20 + Poly1305",
+                "anchor": "crypto-aead-xchacha20poly1305-ietf"
             },
             {
                 "title": "Secret-key Encryption (Unauthenticated)",

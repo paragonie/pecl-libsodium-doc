@@ -175,7 +175,7 @@ Like `crypto_secretbox`, you should never reuse the same nonce and key.
     }
 
 
-<h3 id="crypto-aead-chacha20poly1305-ietf">Authenticated (secret-key) Encryption with Associated Data - XChaCha20 + Poly1305</h3>
+<h3 id="crypto-aead-xchacha20poly1305-ietf">Authenticated (secret-key) Encryption with Associated Data - XChaCha20 + Poly1305</h3>
 
 This is an extended-nonce variant of ChaCha20-Poly1305, which uses a 24-byte nonce
 rather than an 8-byte or 12-byte nonce. It follows an IETF-compatibile construction.
