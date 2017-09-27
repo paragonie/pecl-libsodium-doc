@@ -234,7 +234,7 @@ You might be able to achieve this result by running `phpenmod sodium` or `php5en
 depending on which webserver you use. Make sure you restart your webserver after
 installing PECL libsodium.
 
-### Verifying your Libsodium Version
+<h3 id="verifying-versions">Verifying your Libsodium Version</h3>
 
 After installing both the library and the PHP extension, make a quick test script to verify that you have the correct version of libsodium installed.
 
@@ -262,7 +262,7 @@ script:
       [0] =>
       int(9)
       [1] =>
-      int(6),
+      int(6)
       [2] =>
       string(6) "1.0.14"
     }

@@ -14,6 +14,10 @@
             {
                 "title": "Installing Libsodium and the PHP extension",
                 "anchor": "installing-libsodium"
+            },
+            {
+                "title": "Verifying your Libsodium Version",
+                "anchor": "verifying-versions"
             }
         ],
         "tags": [
@@ -99,10 +103,6 @@
             {
                 "title": "Constant-Time String Comparison",
                 "anchor": "memcmp"
-            },
-            {
-                "title": "Libsodium Version Checks",
-                "anchor": "version"
             }
         ],
         "tags": [
