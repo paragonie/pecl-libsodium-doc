@@ -53,7 +53,7 @@ extension in PECL is compatible with `ext/sodium` in PHP 7.2.
 
 <h4 id="extension-versions">Which Version of the Extension Should I Install?</h4>
 
-<table>
+<table class="table table-striped responsive">
     <thead>
         <tr>
             <th>PHP Versions Supported</th>
