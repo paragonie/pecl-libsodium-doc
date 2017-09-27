@@ -3,66 +3,65 @@
 These functions are useful in general, regardless of which cryptographic utility
 your application needs.
 
+To view the old API documentation, [click here](https://github.com/paragonie/pecl-libsodium-doc/blob/v1/chapters/03-utilities-helpers.md).
+
 <h3 id="bin2hex">Hexadecimal Encoding</h3>
 
-> `string \Sodium\bin2hex(string $binary)`
+> `string sodium_bin2hex(string $binary)`
 
 Libsodium offers a variant of PHP's `bin2hex()` feature designed to be resistant
 to side-channel attacks. You can use it just like PHP's `bin2hex()` function:
 
-    $hex_string = \Sodium\bin2hex($binary_string);
+    $hex_string = sodium_bin2hex($binary_string);
 
 <h3 id="hex2bin">Hexadecimal Decoding</h3>
 
-> `string \Sodium\hex2bin(string $hex, string $ignore = '')`
+> `string sodium_hex2bin(string $hex, string $ignore = '')`
 
 Similar to above, libsodium also offers a complementary function for the inverse
 operation.
 
-    $binary_string = \Sodium\hex2bin($hex_string);
+    $binary_string = sodium_hex2bin($hex_string);
 
 Libsodium's `hex2bin()` also accepts a second optional string argument for
 characters to ignore. This is useful if, for example, you want to convert an
 IPv6 address into a raw binary string without the : separators breaking your
 algorithm.
 
-    $binary = \Sodium\hex2bin($ipv6_addr, ':');
+    $binary = sodium_hex2bin($ipv6_addr, ':');
 
-Like `\Sodium\bin2hex()`, `\Sodium\hex2bin()` is resistant to side-channel
+Like `sodium_bin2hex()`, `sodium_hex2bin()` is resistant to side-channel
 attacks while PHP's built-in function is not.
 
 <h3 id="memzero">Wiping Sensitive Data from Memory</h3>
 
-> `void \Sodium\memzero(&string $secret);`
+> `void sodium_memzero(&string $secret);`
 
-When you are done handling sensitive information, use `\Sodium\memzero()` to erase
+When you are done handling sensitive information, use `sodium_memzero()` to erase
 the contents of a variable.
 
 > **Warning**: If you're running PHP 7, make sure you're using version 1.0.1 of
 > the PHP extension before using this function.
 
-    $ciphertext = \Sodium\crypto_secretbox($message, $nonce, $key);
-    \Sodium\memzero($message);
-    \Sodium\memzero($key);
+    $ciphertext = sodium_crypto_secretbox($message, $nonce, $key);
+    sodium_memzero($message);
+    sodium_memzero($key);
 
 <h3 id="increment">Incrementor for Sequential Nonces</h3>
 
-> `void \Sodium\increment(&string $binary_string)`
+> `void sodium_increment(&string $binary_string)`
 
 If you need to increment a value (e.g. given a randomly generated nonce, obtain
-the next nonce), use `\Sodium\increment()`.
+the next nonce), use `sodium_increment()`.
 
-> **Warning**: If you're running PHP 7, make sure you're using version 1.0.1 of
-> the PHP extension before using this function.
-
-    $x = \Sodium\randombytes_buf(\Sodium\CRYPTO_SECRETBOX_NONCEBYTES);
+    $x = random_bytes(sodium_CRYPTO_SECRETBOX_NONCEBYTES);
     
     // After an encryption
-    \Sodium\increment($x);
+    sodium_increment($x);
 
 <h3 id="compare">Constant-Time String Comparison</h3>
 
-> `int \Sodium\compare(string $str1, string $str2)`
+> `int sodium_compare(string $str1, string $str2)`
 
 Timing-safe variant of PHP's native [`strcmp()`](https://secure.php.net/strcmp).
 
@@ -72,13 +71,13 @@ replay attacks.
 
 Example:
 
-    if (\Sodium\compare($message['nonce'], $expected_nonce) === 0) {
+    if (sodium_compare($message['nonce'], $expected_nonce) === 0) {
         // Proceed with crypto_box decryption
     }
 
 <h3 id="memcmp">Constant-Time Memory Equality Comparison</h3>
 
-> `int \Sodium\memcmp(string $a, string $b)`
+> `int sodium_memcmp(string $a, string $b)`
 
 Compare two strings in constant time. (Similar to [`hash_equals()`](https://secure.php.net/hash_equals).)
 
@@ -87,35 +86,9 @@ Compare two strings in constant time. (Similar to [`hash_equals()`](https://secu
 
 Example:
 
-    if (\Sodium\memcmp($mac, $given_mac) !== 0) {
+    if (sodium_memcmp($mac, $given_mac) !== 0) {
         // Failure
     }
-
-<h3 id="version">Libsodium Version Checks</h3>
-
-> `int \Sodium\library_version_major()`
-
-Returns the major version of the current version of the sodium library 
-installed.
-
-    var_dump(\Sodium\library_version_major());
-    # int(7)
-
-> `int \Sodium\library_version_minor()`
-
-Returns the minor version of the current version of the sodium library 
-installed.
-
-    var_dump(\Sodium\library_version_minor());
-    # int(6)
-
-> `string \Sodium\version_string()`
-
-Returns a string identifier of the current version of the sodium library 
-installed. (This is irrelevant to the version of the PHP extension!)
-
-    var_dump(\Sodium\version_string());
-    # string(5) "1.0.4"
 
 ### Extra Information
 

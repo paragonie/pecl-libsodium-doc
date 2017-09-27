@@ -11,6 +11,8 @@ skepticism and discretion before implementing any of the functions on this page.
 You can treat all of the recipes on this page as if it were released under the
 MIT license.
 
+To view the old API documentation, [click here](https://github.com/paragonie/pecl-libsodium-doc/blob/v1/chapters/09-recipes.md).
+
 <h3 id="sealed-logs">Sealed Application Security Reports</h3>
 
 **Problem:** Encrypt application logs such that only administrators can read
@@ -21,8 +23,8 @@ messages that went out (and thus won't know what the administrators know about
 his/her activity). We can't stop the attacker from sending false logs after that
 point.
 
-This strategy combines both [`\Sodium\crypto_box_seal()`](08-advanced.md#08-advanced.md#crypto-box-seal)
-and [`\Sodium\crypto_sign()`](05-publickey-crypto.md#crypto-sign).
+This strategy combines both [`sodium_crypto_box_seal()`](08-advanced.md#08-advanced.md#crypto-box-seal)
+and [`sodium_crypto_sign()`](05-publickey-crypto.md#crypto-sign).
 
     class SealedLogs extends Our_Logger_Class
     {
@@ -44,9 +46,9 @@ and [`\Sodium\crypto_sign()`](05-publickey-crypto.md#crypto-sign).
          */
         public function sealedLog($message)
         {
-            $signed = \Sodium\crypto_sign($message, $this->node_secret_key);
+            $signed = sodium_crypto_sign($message, $this->node_secret_key);
             return $this->log(
-                \Sodium\crypto_box_seal($signed, $this->log_public_key);
+                sodium_crypto_box_seal($signed, $this->log_public_key);
             );
         }
     }
@@ -64,8 +66,8 @@ For example:
 On the logging server, you should first open the sealed box then verify the
 signature.
 
-    $unsealed = \Sodium\crypto_box_seal_open($message, $our_box_keypair);
-    $verified = \Sodium\crypto_sign_open(
+    $unsealed = sodium_crypto_box_seal_open($message, $our_box_keypair);
+    $verified = sodium_crypto_sign_open(
         $unsealed,
         $node_publickey
     );
@@ -79,7 +81,7 @@ only because our ciphertext is authenticated.
     crypto_sign | crypto_box_seal 
     Sign       -> Encrypt -> MAC
 
-If `\Sodium\crypto_box_seal` did not offer authenticated encryption, this would
+If `sodium_crypto_box_seal` did not offer authenticated encryption, this would
 be a dangerous construction. Fortunately, it does. **Always Encrypt then MAC!**
 
 <h3 id="encrypted-cookies">Encrypted Cookies</h3>
@@ -91,8 +93,8 @@ alter its contents.
 stored with the ciphertext. Each encryption and authentication key should be
 attached to the cookie name.
 
-This strategy combines both [`\Sodium\crypto_stream_xor()`](08-advanced.md#crypto-stream)
-with [`\Sodium\crypto_auth()`](04-secretkey-crypto.md#crypto-auth).
+This strategy combines both [`sodium_crypto_stream_xor()`](08-advanced.md#crypto-stream)
+with [`sodium_crypto_auth()`](04-secretkey-crypto.md#crypto-auth).
 
     class SodiumCookie
     {
@@ -119,38 +121,38 @@ with [`\Sodium\crypto_auth()`](04-secretkey-crypto.md#crypto-auth).
             if (!array_key_exists($index, $_COOKIE)) {
                 return null;
             }
-            $cookie = \Sodium\hex2bin($_COOKIE[$index]);
+            $cookie = sodium_hex2bin($_COOKIE[$index]);
             list ($encKey, $authKey) = $this->splitKeys($index);
             
             $mac = mb_substr(
                 $cookie, 
                 0,
-                \Sodium\CRYPTO_AUTH_BYTES,
+                SODIUM_CRYPTO_AUTH_BYTES,
                 '8bit'
             );
             $nonce = mb_substr(
                 $cookie,
-                \Sodium\CRYPTO_AUTH_BYTES,
-                \Sodium\CRYPTO_STREAM_NONCEBYTES,
+                SODIUM_CRYPTO_AUTH_BYTES,
+                SODIUM_CRYPTO_STREAM_NONCEBYTES,
                 '8bit'
             );
             $ciphertext = mb_substr(
                 $cookie,
-                \Sodium\CRYPTO_AUTH_BYTES + \Sodium\CRYPTO_STREAM_NONCEBYTES,
+                SODIUM_CRYPTO_AUTH_BYTES + SODIUM_CRYPTO_STREAM_NONCEBYTES,
                 null,
                 '8bit'
             );
 
-            if (\Sodium\crypto_auth_verify($mac, $nonce . $ciphertext, $authKey)) {
-                \Sodium\memzero($authKey);
-                $plaintext = \Sodium\crypto_stream_xor($ciphertext, $nonce, $encKey);
-                \Sodium\memzero($encKey);
+            if (sodium_crypto_auth_verify($mac, $nonce . $ciphertext, $authKey)) {
+                sodium_memzero($authKey);
+                $plaintext = sodium_crypto_stream_xor($ciphertext, $nonce, $encKey);
+                sodium_memzero($encKey);
                 if ($plaintext !== false) {
                     return $plaintext;
                 }
             } else {
-                \Sodium\memzero($authKey);
-                \Sodium\memzero($encKey);
+                sodium_memzero($authKey);
+                sodium_memzero($encKey);
             }
             throw new Exception('Decryption failed.');
         }
@@ -164,25 +166,25 @@ with [`\Sodium\crypto_auth()`](04-secretkey-crypto.md#crypto-auth).
          */
         public function write($index, $value)
         {
-            $nonce = \Sodium\randombytes_buf(
-                \Sodium\CRYPTO_STREAM_NONCEBYTES
+            $nonce = random_bytes(
+                SODIUM_CRYPTO_STREAM_NONCEBYTES
             );
             list ($encKey, $authKey) = $this->splitKeys($index);
-            $ciphertext = \Sodium\crypto_stream_xor(
+            $ciphertext = sodium_crypto_stream_xor(
                 $value,
                 $nonce,
                 $encKey
             );
-            \Sodium\memzero($value);
+            sodium_memzero($value);
 
-            $mac = \Sodium\crypto_auth($nonce . $ciphertext, $authkey);
+            $mac = sodium_crypto_auth($nonce . $ciphertext, $authkey);
 
-            \Sodium\memzero($encKey);
-            \Sodium\memzero($authKey);
+            sodium_memzero($encKey);
+            sodium_memzero($authKey);
 
             return setcookie(
                 $index,
-                \Sodium\bin2hex($mac . $nonce . $ciphertext)
+                sodium_bin2hex($mac . $nonce . $ciphertext)
             );
         }
 
@@ -195,15 +197,15 @@ with [`\Sodium\crypto_auth()`](04-secretkey-crypto.md#crypto-auth).
          */
         private function splitKeys($cookieName)
         {
-            $encKey = \Sodium\crypto_generichash(
-                \Sodium\crypto_generichash('encryption', $cookieName),
+            $encKey = sodium_crypto_generichash(
+                sodium_crypto_generichash('encryption', $cookieName),
                 $this->key,
-                \Sodium\CRYPTO_STREAM_KEYBYTES
+                SODIUM_CRYPTO_STREAM_KEYBYTES
             );
-            $authKey = \Sodium\crypto_generichash(
-                \Sodium\crypto_generichash('authentication', $cookieName),
+            $authKey = sodium_crypto_generichash(
+                sodium_crypto_generichash('authentication', $cookieName),
                 $this->key,
-                \Sodium\CRYPTO_AUTH_KEYBYTES
+                SODIUM_CRYPTO_AUTH_KEYBYTES
             );
             return [$encKey, $authKey];
         }
@@ -227,7 +229,7 @@ On the next page load:
 **Problem:** We want to hash passwords on our webserver, then encrypt them
 before storing them in our database server (which is on separate hardware).
 
-This strategy combines [`\Sodium\crypto_pwhash_scryptsalsa208sha256_*()`](07-password-hashing.md#crypto-pwhash-scryptsalsa208sha256-str)
+This strategy combines [`sodium_crypto_pwhash_scryptsalsa208sha256_*()`](07-password-hashing.md#crypto-pwhash-scryptsalsa208sha256-str)
 with the Encrypt-Then-MAC construction (as written above) to facilitate 
 authenticated secret-key encryption and password hash verification.
 
@@ -243,31 +245,31 @@ authenticated secret-key encryption and password hash verification.
         public function hash($password, $secret_key)
         {
             // First, let's calculate the hash
-            $hashed = \Sodium\crypto_pwhash_scryptsalsa208sha256_str(
+            $hashed = sodium_crypto_pwhash_scryptsalsa208sha256_str(
                 $password,
-                \Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_INTERACTIVE,
-                \Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_MEMLIMIT_INTERACTIVE
+                SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_INTERACTIVE,
+                SODIUM_CRYPTO_PWHASH_SCRYPTSALSA208SHA256_MEMLIMIT_INTERACTIVE
             );
             
             list ($encKey, $authKey) = $this->splitKeys($secret_key);
-            \Sodium\memzero($secret_key);
+            sodium_memzero($secret_key);
 
-            $nonce = \Sodium\randombytes_buf(
-                \Sodium\CRYPTO_STREAM_NONCEBYTES
+            $nonce = random_bytes(
+                SODIUM_CRYPTO_STREAM_NONCEBYTES
             );
             
-            $ciphertext = \Sodium\crypto_stream_xor(
+            $ciphertext = sodium_crypto_stream_xor(
                 $hashed,
                 $nonce,
                 $encKey
             );
             
-            $mac = \Sodium\crypto_auth($nonce . $ciphertext, $authkey);
+            $mac = sodium_crypto_auth($nonce . $ciphertext, $authkey);
 
-            \Sodium\memzero($encKey);
-            \Sodium\memzero($authKey);
+            sodium_memzero($encKey);
+            sodium_memzero($authKey);
 
-            return \Sodium\bin2hex($mac . $nonce . $ciphertext);
+            return sodium_bin2hex($mac . $nonce . $ciphertext);
         }
 
         /**
@@ -282,32 +284,32 @@ authenticated secret-key encryption and password hash verification.
             $mac = mb_substr(
                 $stored, 
                 0,
-                \Sodium\CRYPTO_AUTH_BYTES,
+                SODIUM_CRYPTO_AUTH_BYTES,
                 '8bit'
             );
             $nonce = mb_substr(
                 $stored,
-                \Sodium\CRYPTO_AUTH_BYTES,
-                \Sodium\CRYPTO_STREAM_NONCEBYTES,
+                SODIUM_CRYPTO_AUTH_BYTES,
+                SODIUM_CRYPTO_STREAM_NONCEBYTES,
                 '8bit'
             );
             $ciphertext = mb_substr(
                 $stored,
-                \Sodium\CRYPTO_AUTH_BYTES + \Sodium\CRYPTO_STREAM_NONCEBYTES,
+                SODIUM_CRYPTO_AUTH_BYTES + SODIUM_CRYPTO_STREAM_NONCEBYTES,
                 null,
                 '8bit'
             );
             
-            if (\Sodium\crypto_auth_verify($mac, $nonce . $ciphertext, $authKey)) {
-                \Sodium\memzero($authKey);
-                $hash_str = \Sodium\crypto_stream_xor($ciphertext, $nonce, $encKey);
-                \Sodium\memzero($encKey);
+            if (sodium_crypto_auth_verify($mac, $nonce . $ciphertext, $authKey)) {
+                sodium_memzero($authKey);
+                $hash_str = sodium_crypto_stream_xor($ciphertext, $nonce, $encKey);
+                sodium_memzero($encKey);
                 if ($hash_str !== false) {
-                    return \Sodium\crypto_pwhash_scryptsalsa208sha256_str_verify($hash_str, $password);
+                    return sodium_crypto_pwhash_scryptsalsa208sha256_str_verify($hash_str, $password);
                 }
             } else {
-                \Sodium\memzero($authKey);
-                \Sodium\memzero($encKey);
+                sodium_memzero($authKey);
+                sodium_memzero($encKey);
             }
             throw new Exception('Decryption failed.');
         }
@@ -321,15 +323,15 @@ authenticated secret-key encryption and password hash verification.
          */
         private function splitKeys($secret_key)
         {
-            $encKey = \Sodium\crypto_generichash(
+            $encKey = sodium_crypto_generichash(
                 'encryption',
                 $secret_key,
-                \Sodium\CRYPTO_STREAM_KEYBYTES
+                SODIUM_CRYPTO_STREAM_KEYBYTES
             );
-            $authKey = \Sodium\crypto_generichash(
+            $authKey = sodium_crypto_generichash(
                 'authentication',
                 $secret_key,
-                \Sodium\CRYPTO_AUTH_KEYBYTES
+                SODIUM_CRYPTO_AUTH_KEYBYTES
             );
             return [$encKey, $authKey];
         }

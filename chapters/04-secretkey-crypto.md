@@ -5,6 +5,8 @@ communication are in possession of the same secret key. This can be the result
 of a shared password (see [Chapter 8](07-password-hashing.md)) or Diffie Hellman key agreement (see 
 [Chapter 9](08-advanced.md#crypto-kx)).
 
+To view the old API documentation, [click here](https://github.com/paragonie/pecl-libsodium-doc/blob/v1/chapters/04-secretkey-crypto.md).
+
 **Contrast with [Public-key cryptography](05-publickey-crypto.md).**
 
 <h3 id="crypto-secretbox">Secret-key Authenticated Encryption</h3>
@@ -15,7 +17,7 @@ you only need to know two functions.
 
 #### Encrypt a message
 
-> `string \Sodium\crypto_secretbox(string $plaintext, string $nonce, string $key)`
+> `string sodium_crypto_secretbox(string $plaintext, string $nonce, string $key)`
 
 This operation:
 
@@ -30,22 +32,22 @@ The same message encrypted with the same key, but with two different nonces,
 will produce two totally different ciphertexts.
 
 The nonce doesn't have to be confidential, but it should never ever be reused
-with the same key. The easiest way to generate a nonce is to use `randombytes_buf()`.
+with the same key. The easiest way to generate a nonce is to use `random_bytes()`.
 
     // Generating your encryption key
-    $key = \Sodium\randombytes_buf(\Sodium\CRYPTO_SECRETBOX_KEYBYTES);
+    $key = random_bytes(SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
     
     // Using your key to encrypt information
-    $nonce = \Sodium\randombytes_buf(\Sodium\CRYPTO_SECRETBOX_NONCEBYTES);
-    $ciphertext = \Sodium\crypto_secretbox('test', $nonce, $key);
+    $nonce = random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
+    $ciphertext = sodium_crypto_secretbox('test', $nonce, $key);
 
 <h4 id="crypto-secretbox-open">Decrypt a message</h4>
 
-> `string|bool \Sodium\crypto_secretbox_open(string $ciphertext, string $nonce, string $key)`
+> `string|bool sodium_crypto_secretbox_open(string $ciphertext, string $nonce, string $key)`
 
 Decrypting a message requires the same nonce and key that was used to encrypt it.
 
-    $plaintext = \Sodium\crypto_secretbox_open($ciphertext, $nonce, $key);
+    $plaintext = sodium_crypto_secretbox_open($ciphertext, $nonce, $key);
     if ($plaintext === false) {
         throw new Exception("Bad ciphertext");
     }
@@ -57,34 +59,34 @@ you still want to ensure that nobody on the network can tamper with it. For
 example, if you want to eschew server-side session storage and instead use HTTP
 cookies as your storage mechanism.
 
-First you need an encryption key that is `\Sodium\CRYPTO_AUTH_KEYBYTES` long.
+First you need an encryption key that is `SODIUM_CRYPTO_AUTH_KEYBYTES` long.
 
-    $key = \Sodium\randombytes_buf(\Sodium\CRYPTO_AUTH_KEYBYTES);
+    $key = random_bytes(SODIUM_CRYPTO_AUTH_KEYBYTES);
 
 #### Authenticating a Message
 
-> `string \Sodium\crypto_auth(string $message, string $key);`
+> `string sodium_crypto_auth(string $message, string $key);`
 
 This calculates a [Message Authentication Code](https://paragonie.com/blog/2015/08/you-wouldnt-base64-a-password-cryptography-decoded)
 (MAC) of a given `$message` with a given secret `$key`. Typically you want to 
 prepend or append the MAC to the message before sending it.
 
     $message = json_encode($some_array);
-    $mac = \Sodium\crypto_auth($message, $key);
+    $mac = sodium_crypto_auth($message, $key);
     $outbound = $mac . $message;
 
 #### Verifying the Authenticity of a Message
 
-> `bool \Sodium\crypto_auth_verify(string $mac, string $message, string $key)`
+> `bool sodium_crypto_auth_verify(string $mac, string $message, string $key)`
 
 This function returns `TRUE` if the given `$mac` is valid for a particular 
 `$message` and `$key`. Otherwise it returns `FALSE`. This operation is 
 constant-time and side-channel resistant.
 
-    if (\Sodium\crypto_auth_verify($mac, $message, $key)) {
+    if (sodium_crypto_auth_verify($mac, $message, $key)) {
         $data = json_decode($message, true);
     } else {
-        \Sodium\memzero($key);
+        sodium_memzero($key);
         throw new Exception("Malformed message or invalid MAC");
     }
 

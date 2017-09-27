@@ -23,42 +23,44 @@ Common use cases:
 * Password storage, or rather: storing what it takes to verify a password
   without having to store the actual password.
 
+To view the old API documentation, [click here](https://github.com/paragonie/pecl-libsodium-doc/blob/v1/chapters/07-password-hashing.md).
+
 <h3 id="crypto-pwhash-str">Argon2i Password Hashing and Verification</h3>
 
-> `string \Sodium\crypto_pwhash_str(string $password, int $opslimit, int $memlimit)`
+> `string sodium_crypto_pwhash_str(string $password, int $opslimit, int $memlimit)`
 
 This uses the Argon2i key derivation function to generate a storable password
 hash. It's highly recommended that you use [the provided constants](01-quick-start.md#const-crypto-pwhash)
 for `$opslimit` and `$memlimit`.
 
     // hash the password and return an ASCII string suitable for storage
-    $hash_str = \Sodium\crypto_pwhash_str(
+    $hash_str = sodium_crypto_pwhash_str(
         $password,
-        \Sodium\CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE,
-        \Sodium\CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE
+        SODIUM_CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE,
+        SODIUM_CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE
     );
 
 -----
 
-> `bool \Sodium\crypto_pwhash_str_verify(string $hash_str, string $password)`
+> `bool sodium_crypto_pwhash_str_verify(string $hash_str, string $password)`
 
 Returns `TRUE` if the password matches the given hash.
 
-    if (\Sodium\crypto_pwhash_str_verify($hash_str, $password)) {
+    if (sodium_crypto_pwhash_str_verify($hash_str, $password)) {
         // recommended: wipe the plaintext password from memory
-        \Sodium\memzero($password);
+        sodium_memzero($password);
         
         // Password was valid
     } else {
         // recommended: wipe the plaintext password from memory
-        \Sodium\memzero($password);
+        sodium_memzero($password);
         
         // Password was invalid.
     }
 
 <h3 id="crypto-pwhash">Argon2i Key Derivation</h3>
 
-> `string \Sodium\crypto_pwhash(int $output_length, string $password, string $salt, int $opslimit, int $memlimit)`
+> `string sodium_crypto_pwhash(int $output_length, string $password, string $salt, int $opslimit, int $memlimit)`
 
 If you need to derive an encryption key (e.g. for [`crypto_sign_seed_keypair()`](05-publickey-crypto.md#crypto-sign-seed-keypair))
 from a user-provided password, you can invoke this function directly.
@@ -67,71 +69,21 @@ For each key, you must use a unique and unpredictable salt (which should be stor
 for re-use).
 
     // create a random salt
-    $salt = \Sodium\randombytes_buf(\Sodium\CRYPTO_PWHASH_SALTBYTES);
+    $salt = random_bytes(SODIUM_CRYPTO_PWHASH_SALTBYTES);
 
 And then you can derive your cryptographic key from your password like so:
 
-    $out_len = \Sodium\CRYPTO_SIGN_SEEDBYTES;
-    $seed = \Sodium\crypto_pwhash(
+    $out_len = SODIUM_CRYPTO_SIGN_SEEDBYTES;
+    $seed = sodium_crypto_pwhash(
         $out_len,
         $password,
         $salt,
-        \Sodium\CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE,
-        \Sodium\CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE
+        SODIUM_CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE,
+        SODIUM_CRYPTO_PWHASH_MEMLIMIT_INTERACTIVE
     );
 
-<h3 id="crypto-pwhash-scryptsalsa208sha256-str">Scrypt Password Hashing and Verification</h3>
-
-> `string \Sodium\crypto_pwhash_scryptsalsa208sha256_str(string $password, int $opslimit, int $memlimit)`
-
-This uses the scrypt key derivation function to generate a storable password
-hash. It's highly recommended that you use [the provided constants](01-quick-start.md#const-crypto-pwhash-scrypt)
-for `$opslimit` and `$memlimit`.
-
-
-    // hash the password and return an ASCII string suitable for storage
-    $hash_str = \Sodium\crypto_pwhash_scryptsalsa208sha256_str(
-        $password,
-        \Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_INTERACTIVE,
-        \Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_MEMLIMIT_INTERACTIVE
-    );
-
------
-
-> `bool \Sodium\crypto_pwhash_scryptsalsa208sha256_str_verify(string $hash_str, string $password)`
-
-Returns `TRUE` if the password matches the given hash.
-
-    if (\Sodium\crypto_pwhash_scryptsalsa208sha256_str_verify($hash_str, $password)) {
-        // recommended: wipe the plaintext password from memory
-        \Sodium\memzero($password);
-        
-        // Password was valid
-    } else {
-        // recommended: wipe the plaintext password from memory
-        \Sodium\memzero($password);
-        
-        // Password was invalid.
-    }
-
-<h3 id="crypto-pwhash-scryptsalsa208sha256">Scrypt Key Derivation</h3>
-
-> `string \Sodium\crypto_pwhash_scryptsalsa208sha256(int $output_length, string $password, string $salt, int $opslimit, int $memlimit)`
-
-As with Argon2i above:
-
-    // create a random salt
-    $salt = \Sodium\randombytes_buf(\Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_SALTBYTES);
-    $out_len = \Sodium\CRYPTO_SIGN_SEEDBYTES;
-    $seed = \Sodium\crypto_pwhash_scryptsalsa208sha256(
-        $out_len,
-        $password,
-        $salt,
-        \Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_OPSLIMIT_INTERACTIVE,
-        \Sodium\CRYPTO_PWHASH_SCRYPTSALSA208SHA256_MEMLIMIT_INTERACTIVE
-    );
 
 ### Extra Information
 
 * [Libsodium documentation: Password hashing](https://download.libsodium.org/doc/password_hashing/index.html)
-* [The scrypt key derivation function](http://www.tarsnap.com/scrypt.html)
+* [Password Hashing Competition](https://password-hashing.net)

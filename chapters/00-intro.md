@@ -31,8 +31,8 @@ The design choices emphasize security, and "magic constants" have clear rational
 And despite the emphasis on high security, primitives are faster across-the-board
 than most implementations of the NIST standards.
 
-[Version 1.0.10](https://github.com/jedisct1/libsodium/releases) was released on 
-April 4, 2016.
+[Version 1.0.14](https://github.com/jedisct1/libsodium/releases) was released on 
+September 21, 2017.
 
 #### What is PECL Libsodium?
 
@@ -44,6 +44,47 @@ There are two important things to keep in mind here:
 1. The PECL package doesn't work unless you install libsodium. You need both.
 2. Just because libsodium has a feature doesn't mean it's available (or intended)
    for use by PHP developers.
+   
+#### What is ext/sodium?
+
+Version 7.2.0 and newer of the PHP programming language includes the Sodium extension
+(referred to as `ext/sodium`) as a core cryptography library. Version 2 of the PHP
+extension in PECL is compatible with `ext/sodium` in PHP 7.2.
+
+<h4 id="extension-versions">Which Version of the Extension Should I Install?</h4>
+
+<table>
+    <thead>
+        <tr>
+            <th>PHP Versions Supported</th>
+            <th>PECL Version</th>
+            <th>Libsodium Version</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>7.2 and newer</td>
+            <td>&mdash;</td>
+            <td>1.0.9 or newer</td>
+        </tr>
+        <tr>
+            <td>7.0, 7.1</td>
+            <td>2.0.7</td>
+            <td>1.0.9 or newer</td>
+        </tr>
+        <tr>
+            <td>5.4, 5.5, 5.6, 7.0, 7.1</td>
+            <td>1.0.6</td>
+            <td>1.0.3 or newer</td>
+        </tr>
+    </tbody>
+</table>
+
+#### Can We Use Libsodium on Older PHP and/or If We Cannot Install PHP Extensions?
+
+You're looking for [sodium_compat](https://github.com/paragonie/sodium_compat), which
+supports PHP 5.2 through 7.2, but doesn't support all of libsodium's features. In
+particular, it provides no password hashing algorithms.
 
 <h3 id="terms-concepts">Terms and Concepts</h3>
 
@@ -163,6 +204,12 @@ After installing the necessary utilities, libsodium can be compiled as such:
 
 <h4 id="installing-extension">Installing the PHP Extension via PECL</h4>
 
+For PHP 7.2, you can skip this step. Just make sure you install your OS's equivalent 
+of the `php7.2-sodium` package when you're installing PHP, and all these steps should
+be taken care of for you.
+
+-----
+
 If you don't have the PECL package manager installed on your system, make sure
 you do that first. There are guides for installing PECL available on the 
 Internet for virtually every operating system that PHP supports.
@@ -177,9 +224,13 @@ You can get PECL libsodium by running this command.
 
 And add the following line to your `php.ini` file:
 
+    # Version 2 of the extension:
+    extension=sodium.so
+    
+    # Version 1 of the extension:
     extension=libsodium.so
 
-You might be able to achieve this result by running `php5enmod libsodium`,
+You might be able to achieve this result by running `phpenmod sodium` or `php5enmod libsodium`,
 depending on which webserver you use. Make sure you restart your webserver after
 installing PECL libsodium.
 
@@ -188,13 +239,22 @@ installing PECL libsodium.
 After installing both the library and the PHP extension, make a quick test script to verify that you have the correct version of libsodium installed.
 
     <?php
+    // Version 2:
+    var_dump([
+        SODIUM_LIBRARY_MAJOR_VERSION,
+        SODIUM_LIBRARY_MINOR_VERSION,
+        SODIUM_LIBRARY_VERSION
+    ]);
+    
+    
+    // Version 1:
     var_dump([
         \Sodium\library_version_major(),
         \Sodium\library_version_minor(),
         \Sodium\version_string()
     ]);
 
-If you're using libsodium 1.0.10, you should see this when you run this test 
+If you're using libsodium 1.0.14, you should see this when you run this test 
 script:
 
     user@hostname:~/dir$ php version_check.php
@@ -202,13 +262,13 @@ script:
       [0] =>
       int(9)
       [1] =>
-      int(2),
+      int(6),
       [2] =>
-      string(6) "1.0.10"
+      string(6) "1.0.14"
     }
 
 If you get different numbers, you won't have access to some of the features that
-should be in libsodium 1.0.10. If you need them, you'll need to go through the
+should be in libsodium 1.0.14. If you need them, you'll need to go through the
 ritual of compiling from source instead (shown above).
 
 Then run `pecl uninstall libsodium` and `pecl install libsodium`. When you run

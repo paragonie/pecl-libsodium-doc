@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.0.0 - 2017-09-27
+
+* Rewrite for the version 2 API.
+
 ### 1.0.2 - 2016-05-04
 
 * Update for libsodium-php 1.0.6
