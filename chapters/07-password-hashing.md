@@ -1,5 +1,9 @@
 # Password Hashing
 
+Before you decide whether or not to use a feature, check the
+[quick reference](https://paragonie.com/blog/2017/06/libsodium-quick-reference-quick-comparison-similar-functions-and-which-one-use)
+page, which explains what each function does and where each should be used.
+
 (Copied From the Libsodium documentation):
 
 Secret keys used to encrypt or sign confidential data have to be chosen from a

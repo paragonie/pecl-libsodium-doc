@@ -4,6 +4,10 @@ The functions documented in this chapter are meant for advanced developers. Some
 of the functions can be *dangerous* if used improperly, and thus their uses are
 discouraged for developers searching for general-purpose cryptography solutions.
 
+Before you decide whether or not to use a feature, check the
+[quick reference](https://paragonie.com/blog/2017/06/libsodium-quick-reference-quick-comparison-similar-functions-and-which-one-use)
+page, which explains what each function does and where each should be used.
+
 To view the old API documentation, [click here](https://github.com/paragonie/pecl-libsodium-doc/blob/v1/chapters/08-advanced.md).
 
 <h2>Advanced Secret-key Cryptography</h2>

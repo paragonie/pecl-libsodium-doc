@@ -5,6 +5,10 @@ communication are in possession of the same secret key. This can be the result
 of a shared password (see [Chapter 8](07-password-hashing.md)) or Diffie Hellman key agreement (see 
 [Chapter 9](08-advanced.md#crypto-kx)).
 
+Before you decide whether or not to use a feature, check the
+[quick reference](https://paragonie.com/blog/2017/06/libsodium-quick-reference-quick-comparison-similar-functions-and-which-one-use)
+page, which explains what each function does and where each should be used.
+
 To view the old API documentation, [click here](https://github.com/paragonie/pecl-libsodium-doc/blob/v1/chapters/04-secretkey-crypto.md).
 
 **Contrast with [Public-key cryptography](05-publickey-crypto.md).**

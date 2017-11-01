@@ -5,6 +5,10 @@ participants possess the same exact secret key, public-key cryptography allows
 you to generate a key-pair (one **secret key** and a related **public key**). 
 You can freely share your public key, but your secret key must never be shared.
 
+Before you decide whether or not to use a feature, check the
+[quick reference](https://paragonie.com/blog/2017/06/libsodium-quick-reference-quick-comparison-similar-functions-and-which-one-use)
+page, which explains what each function does and where each should be used.
+
 To view the old API documentation, [click here](https://github.com/paragonie/pecl-libsodium-doc/blob/v1/chapters/05-publickey-crypto.md).
 
 In order to communicate with another entity, you must have their public key and

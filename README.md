@@ -13,6 +13,8 @@ This ebook is available to the public under the [Creative Commons Attribution In
 Feel free to fork, download, print, copy, redistribute, share, and remix it to
 your heart's content.
 
+See also: [**Libsodium Quick Reference**](https://paragonie.com/blog/2017/06/libsodium-quick-reference-quick-comparison-similar-functions-and-which-one-use)
+
 ## If you're looking for the Libsodium source code, go here instead:
 
 * [libsodium](https://github.com/jedisct1/libsodium) for the library
