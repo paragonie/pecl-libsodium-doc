@@ -336,3 +336,42 @@ authenticated secret-key encryption and password hash verification.
             return [$encKey, $authKey];
         }
     }
+
+ <h3 id="streamed-file-encryption">Encrypting large files using secret streams</h3>
+
+ **Problem** We want to encrypt a large file to disk, but don't want to bring the whole file into memory.
+
+ **Desired solution** We use [libsodium's secret streams](https://download.libsodium.org/doc/secret-key_cryptography/secretstream) to encrypt the file in chunks.
+
+ **Encrypting**
+
+     $source = fopen($source_filename, 'rb');
+     $chunk_size = 8192;
+     $destination = fopen($destination_filename, 'wb');
+     $secret = sodium_crypto_secretstream_xchacha20poly1305_keygen();
+     list($state, $header) = sodium_crypto_secretstream_xchacha20poly1305_init_push($secret);
+     fwrite($destination, $header);
+     while (!feof($source))
+     {
+         $chunk = fread($source, $chunk_size);
+         $out = sodium_crypto_secretstream_xchacha20poly1305_push($state, $chunk);
+         fwrite($destination, $out);
+     }
+     fclose($destination);
+     fclose($source);
+
+  **Decrypting**
+
+      $handle = fopen($encrypted_filepath, 'rb');
+      $unencrypted = fopen($destination_filename, 'wb');
+      $header = fread($handle, SODIUM_CRYPTO_SECRETSTREAM_XCHACHA20POLY1305_HEADERBYTES);
+      // Same secret as encrypting side.
+      $state = sodium_crypto_secretstream_xchacha20poly1305_init_pull($header, $secret);
+      while (!feof($handle)) {
+          // Same chunk size as encrypting side.
+          $chunk = fread($handle, $chunk_size);
+          list($raw, $tag) = sodium_crypto_secretstream_xchacha20poly1305_pull($state, $chunk);
+          fwrite($unencrypted, $raw);
+      }
+      fclose($handle);
+      fclose($unencrypted);
