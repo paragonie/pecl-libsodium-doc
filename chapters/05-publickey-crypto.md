@@ -75,7 +75,7 @@ binary string that should only be used once).
         $alice_box_secretkey,
         $bob_box_publickey
     );
-    $message_nonce = random_bytes(SODIUM_CRYPTO_BOX_NONCEBYTES);
+    $nonce = random_bytes(SODIUM_CRYPTO_BOX_NONCEBYTES);
     $ciphertext = sodium_crypto_box(
         $message,
         $nonce,
